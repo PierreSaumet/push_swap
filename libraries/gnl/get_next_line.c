@@ -5,100 +5,141 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: psaumet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/15 13:00:39 by psaumet           #+#    #+#             */
-/*   Updated: 2019/12/20 17:06:56 by psaumet          ###   ########.fr       */
+/*   Created: 2019/12/15 12:50:34 by psaumet           #+#    #+#             */
+/*   Updated: 2019/12/20 17:07:02 by psaumet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/get_next_line.h"
+#include "get_next_line.h"
+#include <stdio.h>
 
-char	*ft_strchr(char *s)
+void	*ft_memdel(void *ptr)
+{
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
+	return (NULL);
+}
+
+int		newline_check(char *stock, int read_size)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
+	if (read_size == 0 && stock[0] == '\0')
+		return (2);
+	if (read_size == 0 || stock == NULL)
+		return (0);
+	while (stock[i] != '\0')
 	{
-		if (s[i] == '\n')
-			return ((char *)s + i);
+		if (stock[i] == '\n')
+			return (1);
 		i++;
 	}
-	if (s[i] == '\n')
-		return ((char *)s + i);
 	return (0);
 }
 
-void	ft_free(char **as)
-{
-	if (as != NULL && *as != NULL)
-	{
-		free(*as);
-		*as = NULL;
-	}
-}
-
-int		ft_strlen(char *str)
+char	*buf_join(char *stock, char *buf)
 {
 	int		i;
+	int		j;
+	char	*new;
 
 	i = 0;
-	if (str == NULL)
-		return (-1);
-	while (str[i])
+	j = 0;
+	while (stock != NULL && stock[i] != '\0')
 		i++;
-	return (i);
+	while (buf[j] != '\0')
+		j++;
+	if (!(new = malloc(sizeof(char) * (i + j + 1))))
+		return ((char *)ft_memdel(stock));
+	i = 0;
+	j = 0;
+	while (stock != NULL && stock[i] != '\0')
+		new[i++] = stock[j++];
+	j = 0;
+	while (buf[j] != '\0')
+		new[i++] = buf[j++];
+	new[i] = '\0';
+	if (stock != NULL)
+		ft_memdel(stock);
+	return (new);
 }
 
-int		ft_gnl(char **s, char **line)
+char	*stock_trim(char *stock)
 {
-	int		len;
-	char	*tmp;
+	int		i;
+	int		j;
+	char	*trimmed;
 
-	len = 0;
-	while ((*s)[len] != '\n' && (*s)[len] != '\0')
-		len++;
-	if ((*s)[len] == '\n')
+	i = 0;
+	j = 0;
+	while (stock[i] != '\n' && stock[i] != '\0')
+		i++;
+	while (stock[i++] != '\0')
+		j++;
+	if (!(trimmed = malloc(sizeof(char) * j + 1)))
+		return (ft_memdel(stock));
+	i = 0;
+	j = 0;
+	while (stock[i] != '\n' && stock[i] != '\0')
+		i++;
+	if (stock[i] == '\0')
+		i--;
+	i++;
+	while (stock[i] != '\0')
+		trimmed[j++] = stock[i++];
+	trimmed[j] = '\0';
+	ft_memdel(stock);
+	free(trimmed);
+	return ((trimmed = NULL));
+}
+
+char	*get_line(char *stock)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (stock[i] != '\n' && stock[i] != '\0')
+		i++;
+	if (!(line = malloc(sizeof(char) * i + 1)))
+		return (ft_memdel(stock));
+	i = 0;
+	while (stock[i] != '\n' && stock[i] != '\0')
 	{
-		if ((*s)[0] == '\0')
-			ft_free(s);
-		*line = ft_substr(*s, 0, len);
-		tmp = ft_strdup(&((*s)[len + 1]));
-		free(*s);
-		*s = tmp;
+		line[i] = stock[i];
+		i++;
 	}
-	else
-	{
-		*line = ft_strdup(*s);
-		ft_free(s);
-		s = NULL;
-	}
-	return (1);
+	line[i] = '\0';
+	return (line);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	int			ret;
-	static char	*str[1024];
-	char		buffer[125 + 1];
-	char		*tmp;
+	int			read_len;
+	char		buf[BUFFER_SIZE + 1];
+	static char	*stock = NULL;
 
-	if (fd < 0 || line == NULL)
+	if (line == NULL || fd < 0 || BUFFER_SIZE < 1 || (read(fd, buf, 0)) < 0)
 		return (-1);
-	while ((ret = read(fd, buffer, 124)) > 0)
+	read_len = 1;
+	while (!(newline_check(stock, read_len)))
 	{
-		if (ft_check_ret(line, ret) == 0)
-			return (0);
-		buffer[ret] = '\0';
-		if (str[fd] == NULL)
-			str[fd] = ft_strdup(buffer);
-		else
-		{
-			tmp = ft_strjoin(str[fd], buffer);
-			free(str[fd]);
-			str[fd] = tmp;
-		}
-		if (ft_strchr(str[fd]))
-			break ;
+		if ((read_len = read(fd, buf, BUFFER_SIZE)) == -1)
+			return (-1);
+		buf[read_len] = '\0';
+		(read_len == 0 || buf[read_len - 1] != '\n') ? printf("  \b\b") : 0;
+		if ((stock = buf_join(stock, buf)) == NULL)
+			return (-1);
 	}
-	return (ft_final_check(str, line, ret, fd));
+	if (newline_check(stock, read_len) == 2 && (*line = stock))
+		return (-2);
+	if ((*line = get_line(stock)) == NULL)
+		return (-1);
+	if ((stock = stock_trim(stock)))
+		return (-1);
+	return (read_len != 0 ? 1 : 0);
 }

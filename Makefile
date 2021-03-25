@@ -14,11 +14,22 @@ NAME		=		checker
 
 SRCS		=		main.c
 
-SRCS		+=		libraries/gnl/get_next_line.c				\
-					libraries/gnl/get_next_line_utils.c
+SRCS		+=		srcs/free/free_list.c		\
+					srcs/lists/lst_init_insert.c	\
+					srcs/lists/lst_display.c		\
+					srcs/cmd/ft_check_cmd.c			\
+					srcs/cmd/ft_push.c				\
+					srcs/cmd/ft_reverse_rotate.c	\
+					srcs/cmd/ft_rotate.c			\
+					srcs/cmd/ft_swap.c				
 
-HEADER		+=		headers/checker.h							\
-					headers/get_next_line.h
+LIBFT		=		libraries/libft/libft.a
+
+GNL			=		libraries/gnl/get_next_line.a
+
+HEADER		+=		headers/checker.h \
+					libraries/libft/libft.h	\
+					libraries/gnl/get_next_line.h
 
 CC			=		gcc
 
@@ -29,31 +40,30 @@ OBJS		=		$(SRCS:.c=.o)
 INCLUDES	=		headers/
 
 
-#all:			$(NAME)
-
-#$(NAME):		${OBJS}
-#				ar rc ${NAME} ${OBJS}
-				
-#.c.o:		${CC} ${CFLAGS} -I $(INCLUDES) -c $< -o ${<:.c=.o}
-
-
-
-all:  $(NAME)
+all: libftcomp gnlcomp $(NAME)
 
 $(OBJS): %.o: %.c $(HEADER)
 		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ -g
 
 $(NAME): $(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) -lm -o $@
+			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -lm -o $@
 
+libftcomp:
+		cd libraries/libft && make
 
-
-
+gnlcomp:
+		cd libraries/gnl && make
 clean:
-		rm -rf *.o && rm -rf libraries/gnl/*.o
-
+		@rm -rf *.o
+		@rm -rf  libraries/gnl/*.o 
+		@rm -rf  libraries/libft/*.o
+		@rm -rf srcs/cmd/*.o
+		@rm -rf srcs/lists/*.o
+		@rm -rf srcs/free/*.o
 fclean:	clean
 				@rm -rf $(NAME)
+				@rm -rf libraries/libft/*.a
+				@rm -rf libraries/gnl/*.a
 
 
 .SILENT:%
