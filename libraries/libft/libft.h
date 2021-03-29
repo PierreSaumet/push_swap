@@ -19,19 +19,25 @@
 # include <stdio.h>
 # include <stddef.h>
 
-size_t	ft_strlen(const char *trs);
+size_t			ft_strlen(const char *trs);
 
-int	ft_strcmp(const char *s1, const char *s2);
+int				ft_strcmp(const char *s1, const char *s2);
+int				ft_isdigit(int c);
+int				ft_atoi(const char *str);
+char			**ft_split(char const *s, char c);
 
-void	*ft_memset(void *b, int c, size_t len);
-void	*ft_memdel(void *ptr);
+size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
+long int		ft_strtol(char *line);
 
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strnew(size_t size);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *src);
-char	*ft_strcpy(char *dst, const char *src);
-char	*ft_strchr(const char *str, int c);
-char	*ft_strcat(char *dst, const char *src);
+void			*ft_memset(void *b, int c, size_t len);
+void			*ft_memdel(void *ptr);
+
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strnew(size_t size);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_strdup(const char *src);
+char			*ft_strcpy(char *dst, const char *src);
+char			*ft_strchr(const char *str, int c);
+char			*ft_strcat(char *dst, const char *src);
 
 #endif

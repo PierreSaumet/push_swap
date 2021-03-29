@@ -23,6 +23,6 @@
 # include <stdio.h>
 # include <string.h>
 
-
 int		get_next_line(int fd, char **line);
+void	*ft_memdel(void *ptr);
 #endif

@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_check_duplicate.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psaumet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/22 11:18:58 by psaumet           #+#    #+#             */
-/*   Updated: 2019/11/22 11:19:00 by psaumet          ###   ########.fr       */
+/*   Created: 2019/11/22 11:20:06 by psaumet           #+#    #+#             */
+/*   Updated: 2019/11/22 13:33:53 by psaumet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../headers/checker.h"
 
-char	*ft_strdup(const char *src)
+int		ft_duplicate(char **tab, int nbr)
 {
-	char			*dst;
-	unsigned int	i;
-	unsigned int	j;
+	int i;
+	int j;
 
 	i = 0;
-	j = 0;
-	dst = (char *)src;
-	while (src[j])
-		j++;
-	if (!(dst = malloc(j + 1)))
-		return (0);
-	while (src[i])
+	j = 1;
+	while (i < nbr)
 	{
-		dst[i] = src[i];
+		j = 1;
+		while (j < nbr)
+		{
+			if (strcmp(tab[i], tab[j]) == 0 && i != j)
+			{
+				printf("ERREUR doublon");
+				exit(EXIT_FAILURE);
+			}
+			j++;
+		}
 		i++;
 	}
-	dst[i] = '\0';
-	return (dst);
+	printf("TOUT EST GOOD\n");
+	return (0);
 }

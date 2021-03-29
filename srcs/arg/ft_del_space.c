@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_del_space.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psaumet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../headers/checker.h"
 
-char		*ft_strcpy(char *dst, const char *src)
+/*
+**	This file contains 1 function:
+**	- 'char        **ft_del_space(char **tab, int argc)':	If it find a space
+**	character from a string, delete it.
+*/
+
+char		**ft_del_space(char **tab, int argc)
 {
-	char			*str;
-	unsigned int	i;
+	int		i;
+	int		y;
 
-	str = dst;
 	i = 0;
-	while (src[i])
+	while (i < argc)
 	{
-		dst[i] = src[i];
+		y = 0;
+		while (tab[i][y] != '\0')
+		{
+			if (ft_isdigit(tab[i][y]) || tab[i][y] == '-')
+				y++;
+			else
+			{
+				while (tab[i][y] != '\0')
+				{
+					tab[i][y] = tab[i][y + 1];
+					y++;
+				}
+			}
+		}
+		tab[i][y] = '\0';
 		i++;
 	}
-	dst[i] = '\0';
-	return (str);
+	return (tab);
 }

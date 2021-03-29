@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_clean_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psaumet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../headers/checker.h"
 
-char		*ft_strcpy(char *dst, const char *src)
+/*
+**	This file contains 1 function:
+**	- 'char        **ft_clean_tab(char **tab, int argc)':	Clean the tab's
+**	variable by  keeping the first number.
+**	exemple: tab[1] = "12 45 8 9"  ==> tab[1] = "12"
+*/
+
+char		**ft_clean_tab(char **tab, int argc)
 {
-	char			*str;
-	unsigned int	i;
+	int		i;
+	int		y;
 
-	str = dst;
 	i = 0;
-	while (src[i])
+	y = 0;
+	while (i < argc)
 	{
-		dst[i] = src[i];
+		y = 0;
+		while (tab[i][y] != '\0')
+		{
+			if (tab[i][y] == '+' || tab[i][y] == '-' || tab[i][y] == ' ')
+				y++;
+			while (ft_isdigit(tab[i][y]))
+				y++;
+			tab[i][y] = '\0';
+		}
 		i++;
 	}
-	dst[i] = '\0';
-	return (str);
+	return (tab);
 }

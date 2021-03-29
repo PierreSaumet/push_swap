@@ -43,7 +43,7 @@ int         ft_display_lst(t_data *listA, t_data *listB)
         {
             printf("c1\t%d  \n", tmp_a->number);
             tmp_a = tmp_a->next;
-       
+            
         }
     }
     else if (len_a >= len_b) //cas 2 les deux listes existent et a > b

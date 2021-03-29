@@ -12,27 +12,34 @@
 
 #include "../../headers/checker.h"
 
-void        ft_insertion(t_data *listA, int nbr)
+int        ft_insertion(t_data *listA, int nbr)
 {
     t_list *new;
 
     if (!(new = malloc(sizeof(t_list))))
-        return ;
+        return 1;
     new->number = nbr;
     new->next = listA->first;
+    new->prev = NULL;
+    if (listA->first)
+        listA->first->prev = new;
+    else
+        listA->last = new;
     listA->first = new;
+    return (0);
 }
 
-int         ft_full_insertion(t_data *listA, int argc, char **argv)
+int         ft_full_insertion(t_data *listA, int nbr, char **argv)
 {
-    argc = argc - 1;
-    while (argc > 1)
+    //argc = argc - 1;
+    printf("listA %d\n", listA->first->number);
+    while (nbr > 0)
     {
         t_list *new;
-
+        printf("nbr = %d\n", nbr);
         if (!(new = malloc(sizeof(t_list))))
             return (1);
-        new->number = atoi(argv[argc - 1]);
+        new->number = atoi(argv[nbr - 1]);
         printf("new->number = %d\n", new->number);
         new->next = listA->first;
         new->prev = NULL;
@@ -41,7 +48,7 @@ int         ft_full_insertion(t_data *listA, int argc, char **argv)
         else
             listA->last = new;
         listA->first = new;
-        argc--;
+        nbr--;
     }
     return (0);
 }
@@ -60,5 +67,6 @@ t_data      *initialize_list(int argc, char **argv)
     element->prev = NULL;
     list->first = element;
     list->last = element;
+    printf("element->number = %d\n", element->number);
     return (list);
 }

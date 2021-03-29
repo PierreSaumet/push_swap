@@ -13,15 +13,18 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-void	*ft_memdel(void *ptr)
-{
-	if (ptr)
-	{
-		free(ptr);
-		ptr = NULL;
-	}
-	return (NULL);
-}
+/*
+**  This file contains 5 functions:
+**  int		newline_check(char *stock, int read_size):  checks if there is a
+**  new line and return 1 if it is true.
+**  char	*buf_join(char *stock, char *buf):  joins the two strings frome the
+**  previews read.
+**  char	*stock_trim(char *stock):   trimmes the string and stocks it, save
+**  it.
+**  char	*get_line(char *stock): copy the strings.
+**  int		get_next_line(int fd, char **line): main functions, use a buffer_
+**  size casts in the file.h
+*/
 
 int		newline_check(char *stock, int read_size)
 {

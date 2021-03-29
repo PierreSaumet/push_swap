@@ -21,7 +21,12 @@ SRCS		+=		srcs/free/free_list.c		\
 					srcs/cmd/ft_push.c				\
 					srcs/cmd/ft_reverse_rotate.c	\
 					srcs/cmd/ft_rotate.c			\
-					srcs/cmd/ft_swap.c				
+					srcs/cmd/ft_swap.c				\
+					srcs/arg/ft_check_int.c			\
+					srcs/arg/ft_check_duplicate.c	\
+					srcs/arg/ft_check_zero.c		\
+					srcs/arg/ft_del_space.c			\
+					srcs/arg/ft_clean_tab.c
 
 LIBFT		=		libraries/libft/libft.a
 
@@ -60,6 +65,7 @@ clean:
 		@rm -rf srcs/cmd/*.o
 		@rm -rf srcs/lists/*.o
 		@rm -rf srcs/free/*.o
+		@rm -rf srcs/arg/*.o
 fclean:	clean
 				@rm -rf $(NAME)
 				@rm -rf libraries/libft/*.a

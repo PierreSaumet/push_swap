@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psaumet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/22 11:18:58 by psaumet           #+#    #+#             */
-/*   Updated: 2019/11/22 11:19:00 by psaumet          ###   ########.fr       */
+/*   Created: 2019/11/22 11:20:06 by psaumet           #+#    #+#             */
+/*   Updated: 2019/11/22 13:33:53 by psaumet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char			*dst;
 	unsigned int	i;
 	unsigned int	j;
 
-	i = 0;
+	i = ft_strlen(src);
 	j = 0;
-	dst = (char *)src;
-	while (src[j])
-		j++;
-	if (!(dst = malloc(j + 1)))
+	if (dst == NULL)
 		return (0);
-	while (src[i])
+	if (src == NULL)
+		return (0);
+	if (!dstsize)
+		return (i);
+	while (src[j] && j < (dstsize - 1))
 	{
-		dst[i] = src[i];
-		i++;
+		dst[j] = src[j];
+		j++;
 	}
-	dst[i] = '\0';
-	return (dst);
+	dst[j] = '\0';
+	return (i);
 }

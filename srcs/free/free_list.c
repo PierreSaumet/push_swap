@@ -12,6 +12,18 @@
 
 #include "../../headers/checker.h"
 
+void    ft_free_tab(char **tab, int nbr)
+{
+    int i = 0;
+    while (i < nbr)
+    {
+        free(tab[i]);
+        tab[i] = NULL;
+        i++;
+    }
+    free(tab);
+}
+
 int	ft_lstsize(t_list *lst)
 {
 	int		i;
