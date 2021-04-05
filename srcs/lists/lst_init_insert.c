@@ -12,61 +12,72 @@
 
 #include "../../headers/checker.h"
 
-int        ft_insertion(t_data *listA, int nbr)
+t_data      *initialize_listb(void)
 {
-    t_list *new;
+    t_data *lst;
 
-    if (!(new = malloc(sizeof(t_list))))
-        return 1;
-    new->number = nbr;
-    new->next = listA->first;
-    new->prev = NULL;
-    if (listA->first)
-        listA->first->prev = new;
-    else
-        listA->last = new;
-    listA->first = new;
-    return (0);
+    if (!(lst = malloc(sizeof(t_data))))
+        return (NULL);
+    lst->first = NULL;
+    lst->last = NULL;
+    return (lst);
 }
 
-int         ft_full_insertion(t_data *listA, int nbr, char **argv)
+int				ft_insertion(t_data *lst_a, int nbr)
 {
-    //argc = argc - 1;
-    printf("listA %d\n", listA->first->number);
-    while (nbr > 0)
-    {
-        t_list *new;
-        printf("nbr = %d\n", nbr);
-        if (!(new = malloc(sizeof(t_list))))
-            return (1);
-        new->number = atoi(argv[nbr - 1]);
-        printf("new->number = %d\n", new->number);
-        new->next = listA->first;
-        new->prev = NULL;
-        if (listA->first)
-            listA->first->prev = new;
-        else
-            listA->last = new;
-        listA->first = new;
-        nbr--;
-    }
-    return (0);
+	t_list		*new;
+
+	if (!(new = malloc(sizeof(t_list))))
+		return (1);
+	new->number = nbr;
+	new->next = lst_a->first;
+	new->prev = NULL;
+	if (lst_a->first)
+		lst_a->first->prev = new;
+	else
+		lst_a->last = new;
+	lst_a->first = new;
+	return (0);
 }
 
-t_data      *initialize_list(int argc, char **argv)
+int				ft_full_insertion(t_data *lst_a, int nbr, char **argv)
 {
-    t_data *list;
-    t_list  *element;
+	t_list	*new;
 
-    if (!(list = malloc(sizeof(t_data))))
-        return (NULL);
-    if (!(element = malloc(sizeof(t_list))))
-        return (NULL);
-    element->number = atoi(argv[argc - 1]);
-    element->next = NULL;
-    element->prev = NULL;
-    list->first = element;
-    list->last = element;
-    printf("element->number = %d\n", element->number);
-    return (list);
+	new = NULL;
+	while (nbr > 0)
+	{
+		//printf("nbr = %d\n", nbr);
+		if (!(new = malloc(sizeof(t_list))))
+			return (1);
+		new->number = atoi(argv[nbr - 1]);
+		//printf("new->number = %d\n", new->number);
+		new->next = lst_a->first;
+		new->prev = NULL;
+		if (lst_a->first)
+			lst_a->first->prev = new;
+		else
+			lst_a->last = new;
+		lst_a->first = new;
+		nbr--;
+	}
+	return (0);
+}
+
+t_data			*initialize_list(int argc, char **argv)
+{
+	t_data		*list;
+	t_list		*element;
+
+	if (!(list = malloc(sizeof(t_data))))
+		return (NULL);
+	if (!(element = malloc(sizeof(t_list))))
+		return (NULL);
+	element->number = atoi(argv[argc - 1]);
+	element->next = NULL;
+	element->prev = NULL;
+	list->first = element;
+	list->last = element;
+	//printf("element->number = %d\n", element->number);
+	return (list);
 }

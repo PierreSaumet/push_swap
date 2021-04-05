@@ -71,12 +71,12 @@ int			ft_check_int(char **tab, int argc)
 	{
 		if (tab[i][0] == '-')
 		{
-			printf("Go minus\n");
+			//printf("Go minus\n");
 			ft_neg_int(tab[i]);
 		}
 		else
 		{
-			printf("go big\n");
+			//printf("go big\n");
 			ft_int(tab[i]);
 		}
 		i++;

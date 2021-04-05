@@ -35,16 +35,17 @@ int         ft_display_lst(t_data *listA, t_data *listB);
 /*
 **  File lst_init_insert.c
 */
-int        ft_insertion(t_data *listA, int nbr);
-int         ft_full_insertion(t_data *listA, int nbr, char **argv);
+int        ft_insertion(t_data *lst_a, int nbr);
+int         ft_full_insertion(t_data *lst_a, int nbr, char **argv);
 t_data      *initialize_list(int argc, char **argv);
+t_data      *initialize_listb(void);
 
 /*
 **  File free_list.c
 */
 void    ft_free_tab(char **tab, int nbr);
 int	ft_lstsize(t_list *lst);
-int        ft_delete_first(t_data *listA);
+int        ft_delete_first(t_data *lst_a);
 int    ft_free_all(t_data *lst_a, t_data *lst_b);
 
 
@@ -106,11 +107,37 @@ char        **ft_del_space(char **tab, int argc);
 */
 char        **ft_clean_tab(char **tab, int argc);
 
+/*
+**  File ft_check_args.c
+*/
+int     ft_check_args(int argc, char **argv, int i);
+int    ft_count(int argc, char **argv);
+
+/*
+**  File ft_get_nbr.c
+*/
+char    **ft_malloc_tab(int nbr, int argc, char **argv);
+char    **ft_get_nbr(int argc, char **argv, char **tab, int nbr);
 
 
 
 
+/*
+**  File push_swap.c
+*/
+int         ft_end(t_data *lst_a, t_data *lst_b);
 
+/*
+**  File sort_three.c
+*/
+int         nbr_three(int nbr, t_data *lst_a, t_data *lst_b);
+int         ft_find_big(t_data *lst);
+int         ft_find_small(t_data *lst);
+int         solve_3(t_data *lst_a);
+/*
+**  File sort_ten.c
+*/
+int         nbr_ten(int nbr, t_data *lst_a, t_data *lst_b);
 
 
 

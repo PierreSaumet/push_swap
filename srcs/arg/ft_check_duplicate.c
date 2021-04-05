@@ -33,6 +33,6 @@ int		ft_duplicate(char **tab, int nbr)
 		}
 		i++;
 	}
-	printf("TOUT EST GOOD\n");
+	//printf("TOUT EST GOOD\n");
 	return (0);
 }

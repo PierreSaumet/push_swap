@@ -12,7 +12,14 @@
 
 #include "../../headers/checker.h"
 
-int     ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
+/*
+**	This file contains 1 function:
+**	-'int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)':
+**	One main functions of the program. Check the command from the prompt.
+**	Careful to the return, need to be change...
+*/
+
+int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
 {
 	if (ft_strcmp(line, "sa") == 0)
 		ft_sa(lst_a);
@@ -24,20 +31,20 @@ int     ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
 		ft_sb(lst_b);
 	}
 	else if (ft_strcmp(line, "pa") == 0)
-		return(ft_pa(lst_a, lst_b));
+		return (ft_pa(lst_a, lst_b));
 	else if (ft_strcmp(line, "pb") == 0)
-		return(ft_pb(lst_a, lst_b));
+		return (ft_pb(lst_a, lst_b));
 	else if (ft_strcmp(line, "ra") == 0)
-		return(ft_ra(lst_a));
+		return (ft_ra(lst_a));
 	else if (ft_strcmp(line, "rb") == 0)
-		return(ft_rb(lst_b));
+		return (ft_rb(lst_b));
 	else if (ft_strcmp(line, "rr") == 0)
 	{
 		ft_ra(lst_a);
 		ft_rb(lst_b);
 	}
 	else if (ft_strcmp(line, "rra") == 0)
-		return(ft_rra(lst_a));
+		return (ft_rra(lst_a));
 	else if (ft_strcmp(line, "rrb") == 0)
 		return (ft_rrb(lst_b));
 	else if (ft_strcmp(line, "rrr") == 0)

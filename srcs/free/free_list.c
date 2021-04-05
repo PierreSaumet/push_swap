@@ -12,19 +12,32 @@
 
 #include "../../headers/checker.h"
 
-void    ft_free_tab(char **tab, int nbr)
+/*
+**	This file contains 4 functions, all used for freeing:
+**	-'void		ft_free_tab(char **tab, int nbr)':	Free the tab used to free
+**	the data passing by arguments.
+**	-'int			ft_lstsize(t_list *lst)':	Count the elements of the list.
+**	-'int			ft_delete_first(t_data *lst_a)':	Deletes the first item
+**	of the given list.
+**	-'int			ft_free_all(t_data *lst_a, t_data *lst_b)':
+**		Free the two stacks, A and B.
+*/
+
+void		ft_free_tab(char **tab, int nbr)
 {
-    int i = 0;
-    while (i < nbr)
-    {
-        free(tab[i]);
-        tab[i] = NULL;
-        i++;
-    }
-    free(tab);
+	int		i;
+
+	i = 0;
+	while (i < nbr)
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
 }
 
-int	ft_lstsize(t_list *lst)
+int			ft_lstsize(t_list *lst)
 {
 	int		i;
 
@@ -37,41 +50,39 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-
-int        ft_delete_first(t_data *listA)
+int			ft_delete_first(t_data *lst_a)
 {
-    t_list *to_del;
-    if (listA == NULL)
-        exit (EXIT_FAILURE);
-    if (listA->first != NULL)
-    {
-        to_del = listA->first;
-        listA->first = listA->first->next;
-        free(to_del);
-    }
-    return (0);
+	t_list *to_del;
+
+	if (lst_a == NULL)
+		exit(EXIT_FAILURE);
+	if (lst_a->first != NULL)
+	{
+		to_del = lst_a->first;
+		lst_a->first = lst_a->first->next;
+		free(to_del);
+	}
+	return (0);
 }
 
-int    ft_free_all(t_data *lst_a, t_data *lst_b)
+int			ft_free_all(t_data *lst_a, t_data *lst_b)
 {
-    int len_a;
-    int len_b;
+	int		len_a;
+	int		len_b;
 
-    len_a = ft_lstsize(lst_a->first);
-    len_b = ft_lstsize(lst_b->first);
-    printf("dans free all: len_a=%d et len_b=%d\n", len_a, len_b);
-    while (len_a > 0)
-    {
-        ft_delete_first(lst_a);
-        len_a--;
-    }
-    while (len_b > 0)
-    {
-        ft_delete_first(lst_b);
-        len_b--;
-    }
-    free(lst_a);
-    free(lst_b);
-    return (0);
+	len_a = ft_lstsize(lst_a->first);
+	len_b = ft_lstsize(lst_b->first);
+	while (len_a > 0)
+	{
+		ft_delete_first(lst_a);
+		len_a--;
+	}
+	while (len_b > 0)
+	{
+		ft_delete_first(lst_b);
+		len_b--;
+	}
+	free(lst_a);
+	free(lst_b);
+	return (0);
 }
-
