@@ -140,6 +140,7 @@ int         solve_3(t_data *lst_a);
 int         nbr_ten(int nbr, t_data *lst_a, t_data *lst_b);
 
 
-
+int			find_mediane(int nbr, t_data *lst_a);
+int			other(int nbr, t_data *lst_a, t_data *lst_b);
 
 #endif
