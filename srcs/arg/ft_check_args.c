@@ -19,44 +19,43 @@
 **	arguments were given and if they are digit.
 */
 
-
-/*
-**  Count all numbers from all the aruments
-*/
-int    ft_count(int argc, char **argv)
+int			ft_count(int argc, char **argv)
 {
-    int i;
+	int		i;
+	int		count_digit;
 
-    i = 0;
-    argc = argc - 1;
-    int count_digit = 0;
-    while (argc > 0)
-    {
-        i = 0;
-        while (argv[argc][i])
-        {
-            if ((argv[argc][i] == '-' || argv[argc][i] == '+') && ft_isdigit(argv[argc][i + 1]) == 1)
-                i++;
-            else if (ft_isdigit(argv[argc][i]) == 1)
-            {
-                if (argv[argc][i + 1] == ' ' || argv[argc][i + 1] == '\0')
-                    count_digit++;
-                i++;
-            }
-            else
-                i++;
-        }
-        argc--;
-    }
-    return (count_digit);
+	i = 0;
+	argc = argc - 1;
+	count_digit = 0;
+	while (argc > 0)
+	{
+		i = 0;
+		while (argv[argc][i])
+		{
+			if ((argv[argc][i] == '-' || argv[argc][i] == '+')
+					&& ft_isdigit(argv[argc][i + 1]) == 1)
+				i++;
+			else if (ft_isdigit(argv[argc][i]) == 1)
+			{
+				if (argv[argc][i + 1] == ' ' || argv[argc][i + 1] == '\0')
+					count_digit++;
+				i++;
+			}
+			else
+				i++;
+		}
+		argc--;
+	}
+	return (count_digit);
 }
-void        ft_error(void)
+
+void		ft_error(void)
 {
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
-int     ft_check_args(int argc, char **argv, int i)
+int			ft_check_args(int argc, char **argv, int i)
 {
 	if (argc < 2)
 		return (1);
