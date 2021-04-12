@@ -12,6 +12,17 @@
 
 #include "../../headers/checker.h"
 
+/*
+**  This file contains 5 functions:
+**  -'int         ft_find_small(t_data *lst)':  finds the emplacement of the
+**  smallest number of the stack.
+**  -'int         ft_find_big(t_data *lst)':    finds the emplacement of the
+**  biggesy number of the stack.
+**  -'int         solve_2(t_data *lst_a)':  resolve if there are 2 numbers.
+**  -'int         solve_3(t_data *lst_a)':  resolve if there are 3 numbers.
+**  -'int         nbr_three(int nbr, t_data *lst_a, t_data *lst_b)':
+**      choose between the 2 functions above.
+*/
 int         ft_find_small(t_data *lst)
 {
     t_list  *tmp;
@@ -99,8 +110,6 @@ int         solve_3(t_data *lst_a)
 
 int         nbr_three(int nbr, t_data *lst_a, t_data *lst_b)
 {
-    //printf("dans 3\n");
-
     if (nbr == 2)
         return (solve_2(lst_a));
     else if (nbr == 3)

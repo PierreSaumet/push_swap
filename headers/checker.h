@@ -24,6 +24,13 @@ typedef struct s_data
 {
     t_list      *first;
     t_list      *last;
+
+    int         nbr;
+    int         total;
+    int         median;
+    int         q_one;
+    int         q_three;
+    int         count_ra;
 }               t_data;
 
 
@@ -53,7 +60,9 @@ int    ft_free_all(t_data *lst_a, t_data *lst_b);
 **  File ft_check_cmd.c
 */
 int     ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b);
-
+int         ft_rr(t_data *lst_a, t_data *lst_b);
+int         ft_ss(t_data *lst_a, t_data *lst_b);
+int         ft_rrr(t_data *lst_a, t_data *lst_b);
 /*
 **  File ft_swap.c
 */
@@ -142,5 +151,21 @@ int         nbr_ten(int nbr, t_data *lst_a, t_data *lst_b);
 
 int			find_mediane(int nbr, t_data *lst_a);
 int			other(int nbr, t_data *lst_a, t_data *lst_b);
+int         ft_ordre_croissant(t_data *lst_a, t_data *lst_b);
+
+
+/*
+**  File sort_middle.c.c
+*/
+int             test(int nbr, t_data *lst, t_data *lst_b);
+
+int         ft_len_list(t_data *lst);
+int             ft_do_pb(t_data *lst_a, t_data *lst_b);
+int             ft_do_rb(t_data *lst);
+int             ft_do_ra(t_data *lst_a);
+int             ft_do_rra(t_data *lst_a);
+int             ft_do_rrb(t_data *lst);
+int         sort_2000(int nbr, t_data *lst_a, t_data *lst_b);
+int				ft_find_best(int nbr, t_data *lst, int div);
 
 #endif

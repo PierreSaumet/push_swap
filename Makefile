@@ -49,7 +49,9 @@ TEST		+=		srcs/free/free_list.c		\
 					srcs/arg/ft_check_args.c		\
 					srcs/arg/ft_get_nbr.c			\
 					srcs/sort/sort_ten.c			\
-					srcs/sort/sort_big.c
+					srcs/sort/sort_big.c			\
+					srcs/sort/sort_middle.c			\
+					srcs/sort/sort_2000.c
 
 LIBFT		=		libraries/libft/libft.a
 

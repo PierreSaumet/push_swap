@@ -18,6 +18,26 @@
 **	One main functions of the program. Check the command from the prompt.
 **	Careful to the return, need to be change...
 */
+int         ft_rr(t_data *lst_a, t_data *lst_b)
+{
+    ft_ra(lst_a);
+	ft_rb(lst_b);
+    return (0);
+}
+
+int         ft_ss(t_data *lst_a, t_data *lst_b)
+{
+    ft_sa(lst_a);
+	ft_sb(lst_b);
+    return (0);
+}
+
+int         ft_rrr(t_data *lst_a, t_data *lst_b)
+{
+    ft_rra(lst_a);
+	ft_rrb(lst_b);
+    return (0);
+}
 
 int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
 {
@@ -27,8 +47,9 @@ int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
 		ft_sb(lst_b);
 	else if (ft_strcmp(line, "ss") == 0)
 	{
-		ft_sa(lst_a);
-		ft_sb(lst_b);
+        ft_ss(lst_a, lst_b);
+		// ft_sa(lst_a);
+		// ft_sb(lst_b);
 	}
 	else if (ft_strcmp(line, "pa") == 0)
 		return (ft_pa(lst_a, lst_b));
@@ -40,8 +61,9 @@ int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
 		return (ft_rb(lst_b));
 	else if (ft_strcmp(line, "rr") == 0)
 	{
-		ft_ra(lst_a);
-		ft_rb(lst_b);
+        ft_rr(lst_a, lst_b);
+		//ft_ra(lst_a);
+		//ft_rb(lst_b);
 	}
 	else if (ft_strcmp(line, "rra") == 0)
 		return (ft_rra(lst_a));
@@ -49,8 +71,9 @@ int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
 		return (ft_rrb(lst_b));
 	else if (ft_strcmp(line, "rrr") == 0)
 	{
-		ft_rra(lst_a);
-		ft_rrb(lst_b);
+        ft_rrr(lst_a, lst_b);
+		// ft_rra(lst_a);
+		// ft_rrb(lst_b);
 	}
 	else
 	{

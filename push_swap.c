@@ -48,28 +48,17 @@ int         ft_end(t_data *lst_a, t_data *lst_b)
 
 int         ft_push_swap(int nbr, t_data *lst_a, t_data *lst_b)
 {
+    lst_a->nbr = nbr;
+    lst_b->nbr = nbr;
 	if (nbr <= 3)
-	{
-		//printf("Inferieur ou egal 3\n");
-
 		nbr_three(nbr, lst_a, lst_b);
-	}
-	else if (nbr <= 10)
-	{
-		nbr_ten(nbr, lst_a, lst_b);
-	   // printf("Inferieur ou egal a 10\n");
-	}
 	else if (nbr <= 100)
+		nbr_ten(nbr, lst_a, lst_b);
+	else if (nbr <= 2000)
 	{
-		printf("Inferieur ou egal a 100\n");
-	}
-	else if (nbr <= 500)
-	{
-		printf("Inferieur ou egal a 500\n");
-	}
-	else if (nbr <= 1000)
-	{
-		printf("Inferieur ou egal a 1000\n");
+        printf("PLUS DE 100 erreur \n");
+        //exit(EXIT_FAILURE);
+        nbr_ten(nbr, lst_a, lst_b);
 	}
 	else
 	{

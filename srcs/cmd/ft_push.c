@@ -63,8 +63,12 @@ int				ft_pa(t_data *lst_a, t_data *lst_b)
 	t_list		*tmp_a;
 	t_list		*tmp_b;
 
-	if (ft_lst_empty(lst_a, lst_b) == 0)
-		return (0);
+    //printf("ici\n");
+	//if (ft_lst_empty(lst_a, lst_b) == 0)
+	//	return (0);
+    if (lst_b == NULL)
+        return (0);
+    //printf("la\n");
 	tmp_b = lst_b->first;
 	if (!(tmp_a = malloc(sizeof(t_list))))
 		exit(EXIT_FAILURE);
