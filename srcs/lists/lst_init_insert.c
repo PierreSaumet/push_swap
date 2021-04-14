@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/checker.h"
+#include "../../headers/push_swap.h"
 
-t_data      *initialize_listb(void)
+t_data			*initialize_listb(void)
 {
-    t_data *lst;
+	t_data *lst;
 
-    if (!(lst = malloc(sizeof(t_data))))
-        return (NULL);
-    lst->first = NULL;
-    lst->last = NULL;
-    return (lst);
+	if (!(lst = malloc(sizeof(t_data))))
+		return (NULL);
+	lst->first = NULL;
+	lst->last = NULL;
+	return (lst);
 }
 
 int				ft_insertion(t_data *lst_a, int nbr)
@@ -47,11 +47,9 @@ int				ft_full_insertion(t_data *lst_a, int nbr, char **argv)
 	new = NULL;
 	while (nbr > 0)
 	{
-		//printf("nbr = %d\n", nbr);
 		if (!(new = malloc(sizeof(t_list))))
 			return (1);
 		new->number = atoi(argv[nbr - 1]);
-		//printf("new->number = %d\n", new->number);
 		new->next = lst_a->first;
 		new->prev = NULL;
 		if (lst_a->first)
@@ -78,6 +76,5 @@ t_data			*initialize_list(int argc, char **argv)
 	element->prev = NULL;
 	list->first = element;
 	list->last = element;
-	//printf("element->number = %d\n", element->number);
 	return (list);
 }

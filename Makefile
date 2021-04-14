@@ -14,27 +14,12 @@ NAME		=		checker
 
 NAME2		=		push_swap
 
-SRCS		=		checker.c
 
-SRCS		+=		srcs/free/free_list.c		\
-					srcs/lists/lst_init_insert.c	\
-					srcs/lists/lst_display.c		\
-					srcs/cmd/ft_check_cmd.c			\
-					srcs/cmd/ft_push.c				\
-					srcs/cmd/ft_reverse_rotate.c	\
-					srcs/cmd/ft_rotate.c			\
-					srcs/cmd/ft_swap.c				\
-					srcs/arg/ft_check_int.c			\
-					srcs/arg/ft_check_duplicate.c	\
-					srcs/arg/ft_check_zero.c		\
-					srcs/arg/ft_del_space.c			\
-					srcs/arg/ft_clean_tab.c
-
-TEST		=		push_swap.c
 
 TEST		+=		srcs/free/free_list.c		\
 					srcs/lists/lst_init_insert.c	\
 					srcs/lists/lst_display.c		\
+					srcs/lists/lst_find_in.c		\
 					srcs/cmd/ft_check_cmd.c			\
 					srcs/cmd/ft_push.c				\
 					srcs/cmd/ft_reverse_rotate.c	\
@@ -49,15 +34,21 @@ TEST		+=		srcs/free/free_list.c		\
 					srcs/arg/ft_check_args.c		\
 					srcs/arg/ft_get_nbr.c			\
 					srcs/sort/sort_ten.c			\
-					srcs/sort/sort_big.c			\
+					srcs/sort/sort_big_next.c			\
 					srcs/sort/sort_middle.c			\
-					srcs/sort/sort_2000.c
+					srcs/sort/sort_big.c			\
+					srcs/sort/ft_algorithm.c
+
+C		=		checker.c
+
+
+PW		=		push_swap.c
 
 LIBFT		=		libraries/libft/libft.a
 
 GNL			=		libraries/gnl/get_next_line.a
 
-HEADER		+=		headers/checker.h \
+HEADER		+=		headers/push_swap.h \
 					libraries/libft/libft.h	\
 					libraries/gnl/get_next_line.h
 
@@ -65,25 +56,25 @@ CC			=		gcc
 
 CFLAGS		=		-Wall -Wextra -Werror
 
-OBJS		=		$(SRCS:.c=.o)
+OBJS		=		$(TEST:.c=.o) $(C:.c=.o)
 
-OBJS2		=		$(TEST:.c=.o)
+OBJS2		=		$(TEST:.c=.o) $(PW:.c=.o)
 
 INCLUDES	=		headers/
 
 
-all: libftcomp gnlcomp $(NAME2)
+all: libftcomp gnlcomp $(NAME) $(NAME2) 
 
 #$(OBJS): %.o: %.c $(HEADER)
 #		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ -g
 		
 
-#$(NAME): $(OBJS)
-#			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -lm -o $@
+$(NAME): $(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -lm -o $@
 
 
-$(OBJS2): %.o: %.c $(HEADER)
-		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ -g
+#$(OBJS2): %.o: %.c $(HEADER)
+#		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ -g
 		
 
 $(NAME2): $(OBJS2)

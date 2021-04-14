@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/checker.h"
+#include "headers/push_swap.h"
 
 /*
 **  This file is the main file for the 'PUSH_SWAP' program
@@ -26,49 +26,20 @@
 **  -'int     main(int argc, char **argv)': Starts the program.
 */
 
-int         ft_end(t_data *lst_a, t_data *lst_b)
-{
-	t_list  *tmp_a;
-
-	tmp_a = lst_a->first;
-	if (lst_b->first == NULL)   // a marche
-	{
-		while (tmp_a->next != NULL)
-		{
-			if (tmp_a->number > tmp_a->next->number)
-				return (1);
-			tmp_a = tmp_a->next;
-		}
-		return (0);
-	}
-	printf("ERREUR LIST2 PAS VIDE\n");
-	exit(EXIT_FAILURE);
-	return (2);
-}
-
 int         ft_push_swap(int nbr, t_data *lst_a, t_data *lst_b)
 {
     lst_a->nbr = nbr;
     lst_b->nbr = nbr;
 	if (nbr <= 3)
-		nbr_three(nbr, lst_a, lst_b);
+		sort_small(nbr, lst_a);
 	else if (nbr <= 100)
-		nbr_ten(nbr, lst_a, lst_b);
-	else if (nbr <= 2000)
-	{
-        printf("PLUS DE 100 erreur \n");
-        //exit(EXIT_FAILURE);
-        nbr_ten(nbr, lst_a, lst_b);
-	}
+		sort_middle(nbr, lst_a, lst_b);
 	else
-	{
-		printf("superieur a 1000\n");
-	}
-
+        sort_big(nbr, lst_a, lst_b);
 	return (0);
 }
 
-int        ft_start(int nbr, char **argv)
+int        ft_start_pw(int nbr, char **argv)
 {
 	t_data      *lst_a;
 	t_data      *lst_b;
@@ -86,15 +57,24 @@ int        ft_start(int nbr, char **argv)
 	{
 		ft_push_swap(nbr, lst_a, lst_b);
 	}
-
 	///////////////////////////////////
 	printf("\n\nFIN\n");
-	ft_display_lst(lst_a, lst_b);
+    if (ft_ascending(lst_a, lst_b) == 0)
+    {
+        printf("\nListe rangee en %d coups!\n\n", lst_b->total + lst_a->total);
+        sleep(3);
+        ft_display_lst(lst_a, lst_b);
+    }
+	else
+    {
+        printf("Liste pas rangee, ERROR\n");
+    }
+
 	ft_free_all(lst_a, lst_b);     
 	return (0);            
 }
 
-void    ft_initialize(int nbr, int argc, char **argv)
+void    ft_initialize_pw(int nbr, int argc, char **argv)
 {
 	char **tab;
 
@@ -103,12 +83,13 @@ void    ft_initialize(int nbr, int argc, char **argv)
 	tab = ft_get_nbr(argc - 1, argv, tab, nbr);
 	tab = ft_clean_tab(tab, nbr);
 	tab = ft_del_space(tab, nbr);
-	tab =ft_check_zero(tab, nbr, 0, 0);
+	tab = ft_check_zero(tab, nbr, 0, 0);
 	ft_check_int(tab, nbr);
 	ft_duplicate(tab, nbr);
 
+    printf("kek\n");
 	// START THE PROGRAMME then free the numbers 
-	ft_start(nbr, tab);
+	ft_start_pw(nbr, tab);
 	ft_free_tab(tab, nbr);
 }
 
@@ -116,15 +97,16 @@ int     main(int argc, char **argv)
 {
 	int ret;
 
-	ret = ft_check_args(argc, argv, 0);
+	ret = ft_check_args(argc - 1, argv, 0);
 	if (ret == 1)
 		return (1);
 	else
 	{
-		ret = ft_count(argc, argv);
+		ret = ft_count(argc, argv, 0);
+
 		if (ret == 0)
 			return (1);
-		ft_initialize(ret, argc, argv);  
+		ft_initialize_pw(ret, argc, argv);  
 	}
 	return (0);
 }

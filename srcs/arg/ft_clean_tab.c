@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/checker.h"
+#include "../../headers/push_swap.h"
 
 /*
 **	This file contains 1 function:

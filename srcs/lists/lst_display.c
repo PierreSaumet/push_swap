@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/checker.h"
+#include "../../headers/push_swap.h"
 
 /*
 **	FONCTION UTILISEE POUR AFFICHER LES LISTES PENDANT LA PERIODE DE PRODUCTION
@@ -20,36 +20,38 @@
 **	==> creer une fonction d'affichage a la fin du programme!!!!!
 */
 
-int				ft_display_lst(t_data *listA, t_data *listB)
+int				ft_display_lst(t_data *lista, t_data *listb)
 {
-	if (listA == NULL || listB == NULL)
-		return (1);
-	t_list		*tmp_a = listA->first;
-	t_list		*tmp_b = listB->first;
+	t_list		*tmp_a;
+	t_list		*tmp_b;
+	int			len_a;
+	int			len_b;
 
-	int len_a = ft_lstsize(listA->first);
-	int len_b;
-	if (listB->first == NULL)   //cas liste B est vide genre init
+	tmp_a = lista->first;
+	tmp_b = listb->first;
+	if (lista == NULL || listb == NULL)
+		return (1);
+	len_a = ft_lstsize(lista->first);
+	len_b = 0;
+	if (listb->first == NULL)
 	{
 		printf("Liste B est NULL\n");
 		len_b = 0;
-		
 	}
 	else
 	{
 		printf("liste B est different de nul\n");
-		len_b = ft_lstsize(listB->first);
+		len_b = ft_lstsize(listb->first);
 	}
-	if (listB->first == NULL)			// cas 1 liste b = Null donc affiche liste a
+	if (listb->first == NULL)
 	{
 		while (tmp_a != NULL)
 		{
 			printf("c1\t%d  \n", tmp_a->number);
 			tmp_a = tmp_a->next;
-			
 		}
 	}
-	else if (len_a >= len_b) //cas 2 les deux listes existent et a > b
+	else if (len_a >= len_b)
 	{
 		printf("len_a=%d >= len_b=%d\n", len_a, len_b);
 		while (len_b > 0)
@@ -67,7 +69,7 @@ int				ft_display_lst(t_data *listA, t_data *listB)
 			len_a--;
 		}
 	}
-	else if (len_b > len_a) // cas 3 les deux listes existent et b > a
+	else if (len_b > len_a)
 	{
 		printf("len_b=%d > len_a=%d\n", len_b, len_a);
 		while (len_a > 0)
@@ -88,4 +90,21 @@ int				ft_display_lst(t_data *listA, t_data *listB)
 	printf("  \t_ _\n");
 	printf("  \ta b\n");
 	return (0);
+}
+
+void			ft_display_info(int nbr, t_data *lst_a, t_data *lst_b)
+{
+	printf("SOLVE TEST <100\n");
+	printf("Q1 = %d\n", lst_a->q_one);
+	printf("Mediane = %d\n", lst_a->median);
+	printf("Q3 = %d \n", lst_a->q_three);
+	printf("Nombre de chiffres: %d\n", nbr);
+	printf("Emplacement du plus petit: %d\n", ft_find_small(lst_a));
+	printf("Emplacement du plus grand: %d\n", ft_find_big(lst_a));
+	printf("Taille de la liste : %d\n", ft_len_list(lst_a));
+	printf("Nombre des actions totales: %d\n", lst_a->total + lst_b->total);
+	printf("nbr = %d nbr mod 2 = %d\n", nbr, nbr % 2);
+	sleep(5);
+	ft_display_lst(lst_a, lst_b);
+	sleep(2);
 }

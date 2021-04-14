@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/checker.h"
+#include "../../headers/push_swap.h"
 
 /*
 **	This file contains 3 functions:
@@ -21,6 +21,22 @@
 **	-'int     ft_pa(t_data *lst_a, t_data *lst_b)':	Same thing as above, but
 **	stack B into Stack A.
 */
+
+int				ft_do_pa(t_data *lst_a, t_data *lst_b)
+{
+	ft_pa(lst_a, lst_b);
+	write(1, "pa\n", 3);
+	lst_a->total++;
+	return (0);
+}
+
+int				ft_do_pb(t_data *lst_a, t_data *lst_b)
+{
+	ft_pb(lst_a, lst_b);
+	write(1, "pb\n", 3);
+	lst_a->total++;
+	return (0);
+}
 
 int				ft_lst_empty(t_data *lst_a, t_data *lst_b)
 {
@@ -63,12 +79,8 @@ int				ft_pa(t_data *lst_a, t_data *lst_b)
 	t_list		*tmp_a;
 	t_list		*tmp_b;
 
-    //printf("ici\n");
-	//if (ft_lst_empty(lst_a, lst_b) == 0)
-	//	return (0);
-    if (lst_b == NULL)
-        return (0);
-    //printf("la\n");
+	if (lst_b->first == NULL)
+		return (0);
 	tmp_b = lst_b->first;
 	if (!(tmp_a = malloc(sizeof(t_list))))
 		exit(EXIT_FAILURE);

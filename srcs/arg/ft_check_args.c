@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/checker.h"
+#include "../../headers/push_swap.h"
 
 /*
 **  This file contains 2 functions:
@@ -19,14 +19,12 @@
 **	arguments were given and if they are digit.
 */
 
-int			ft_count(int argc, char **argv)
+int			ft_count(int argc, char **argv, int count)
 {
 	int		i;
-	int		count_digit;
 
 	i = 0;
 	argc = argc - 1;
-	count_digit = 0;
 	while (argc > 0)
 	{
 		i = 0;
@@ -38,7 +36,7 @@ int			ft_count(int argc, char **argv)
 			else if (ft_isdigit(argv[argc][i]) == 1)
 			{
 				if (argv[argc][i + 1] == ' ' || argv[argc][i + 1] == '\0')
-					count_digit++;
+					count++;
 				i++;
 			}
 			else
@@ -46,7 +44,7 @@ int			ft_count(int argc, char **argv)
 		}
 		argc--;
 	}
-	return (count_digit);
+	return (count);
 }
 
 void		ft_error(void)
@@ -57,11 +55,10 @@ void		ft_error(void)
 
 int			ft_check_args(int argc, char **argv, int i)
 {
-	if (argc < 2)
+	if (argc + 1 < 2)
 		return (1);
 	else
 	{
-		argc--;
 		while (argc > 0)
 		{
 			while (argv[argc][i])
@@ -69,7 +66,8 @@ int			ft_check_args(int argc, char **argv, int i)
 				if (ft_isdigit(argv[argc][i]) == 0)
 				{
 					if (((argv[argc][i] == '-' || argv[argc][i] == '+')
-							&& ft_isdigit(argv[argc][i + 1])) || argv[argc][i] == ' ')
+							&& ft_isdigit(argv[argc][i + 1]))
+							|| argv[argc][i] == ' ')
 						i++;
 					else
 						ft_error();

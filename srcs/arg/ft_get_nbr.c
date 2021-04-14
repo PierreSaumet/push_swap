@@ -10,16 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/checker.h"
+#include "../../headers/push_swap.h"
 
 /*
 **  This File contains 5 functions
 */
 
+int				ft_end(t_data *lst_a, t_data *lst_b)
+{
+	t_list		*tmp_a;
+
+	tmp_a = lst_a->first;
+	if (lst_b->first == NULL)
+	{
+		while (tmp_a->next != NULL)
+		{
+			if (tmp_a->number > tmp_a->next->number)
+				return (1);
+			tmp_a = tmp_a->next;
+		}
+		return (0);
+	}
+	printf("ERREUR LIST2 PAS VIDE\n");
+	exit(EXIT_FAILURE);
+	return (2);
+}
+
 unsigned int	ft_get_len(int argc, char **argv)
 {
 	unsigned int	len;
-	int 			i;
+	int				i;
 
 	i = 1;
 	len = strlen(argv[i]);
@@ -60,11 +80,9 @@ char			**ft_get_nbr(int argc, char **argv, char **tab, int nbr)
 	while (argc > 0)
 	{
 		i = strlen(argv[argc]);
-		while (i >= 0)
+		while (i-- >= 0)
 		{
-			if (argv[argc][i] == '\0')
-				i--;
-			else if (ft_isdigit(argv[argc][i]))
+			if (ft_isdigit(argv[argc][i]))
 			{
 				if (argv[argc][i - 1] == ' ' || argv[argc][i - 1] == '-'
 						|| argv[argc][i - 1] == '+' || i == 0)
@@ -75,10 +93,7 @@ char			**ft_get_nbr(int argc, char **argv, char **tab, int nbr)
 						strcpy(tab[nbr - 1], &argv[argc][i - 1]);
 					nbr--;
 				}
-				i--;
 			}
-			else
-				i--;
 		}
 		argc--;
 	}

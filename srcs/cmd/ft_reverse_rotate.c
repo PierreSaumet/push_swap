@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/checker.h"
+#include "../../headers/push_swap.h"
 
 /*
 **	This file contains  2 functions:
@@ -19,7 +19,23 @@
 **	-'int     ft_rrb(t_data *lst_b)':	Same as above but with the stack B.
 */
 
-int			ft_rra(t_data *lst_a)
+int				ft_do_rra(t_data *lst_a)
+{
+	ft_rra(lst_a);
+	write(1, "rra\n", 3);
+	lst_a->total++;
+	return (0);
+}
+
+int				ft_do_rrb(t_data *lst)
+{
+	ft_rrb(lst);
+	write(1, "rrb\n", 4);
+	lst->total++;
+	return (0);
+}
+
+int				ft_rra(t_data *lst_a)
 {
 	t_list	*tmp_a;
 	int		tmp_nbr;
@@ -43,7 +59,7 @@ int			ft_rra(t_data *lst_a)
 	return (0);
 }
 
-int			ft_rrb(t_data *lst_b)
+int				ft_rrb(t_data *lst_b)
 {
 	t_list	*tmp_b;
 	int		tmp_nbr;
