@@ -12,6 +12,11 @@
 
 #include "../../headers/push_swap.h"
 
+/*
+**	This file contains 1 function:
+**	-'int		ft_duplicate(char **tab, int nbr)':	Copy the tab
+*/
+
 int		ft_duplicate(char **tab, int nbr)
 {
 	int i;
@@ -26,8 +31,8 @@ int		ft_duplicate(char **tab, int nbr)
 		{
 			if (strcmp(tab[i], tab[j]) == 0 && i != j)
 			{
-				printf("ERREUR doublon");
-				exit(EXIT_FAILURE);
+				printf("Error\n");
+				return (1);
 			}
 			j++;
 		}

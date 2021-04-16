@@ -16,17 +16,19 @@
 **  This file contains 5 functions, used for sorting 100 numbers max.
 **	-'int	solve_middle(int nbr, t_data *lst_a, t_data *lst_b)':	main algo
 **	find the median, push number under it into Stack b, class them and repeat.
-**	-'int	ft_first_middle(t_data *lst_a, t_data *lst_b)':			find all
+**	-'static int	ft_first_middle(t_data *lst_a, t_data *lst_b)': find all
 **	numbers under the median and put them into stack B.
-**	-'int	ft_push_to_a(int nbr, t_data *lst_a, t_data *lst_b)':	push the
-**	stack B into stack A. Big numbers on the top and small at the bottom.
-**	-'int	ft_push_to_b_order(t_data *lst_a, t_data *lst_b)':		push the
-**	number above the median into Stack B and rotate until stack A is sorted.
+**	-'staticint	ft_push_to_a(int nbr, t_data *lst_a, t_data *lst_b)':
+**      push the  stack B into stack A. Big numbers on the top and small
+**      at the bottom.
+**	-'static int	ft_push_to_b_order(t_data *lst_a, t_data *lst_b)':
+**      push the number above the median into Stack B and rotate until stack A
+**      is sorted.
 **	-'int	ft_last_turn(int nbr, t_data *lst_a, t_data *lst_b)':	sort the
 **	stack A, find if it will be by rotate or reverse rotate.
 */
 
-int				ft_first_middle(t_data *lst_a, t_data *lst_b, int end)
+static int		ft_first_middle(t_data *lst_a, t_data *lst_b, int end)
 {
 	t_list		*tmp_a;
 
@@ -54,7 +56,7 @@ int				ft_first_middle(t_data *lst_a, t_data *lst_b, int end)
 	return (0);
 }
 
-int				ft_push_to_a(int nbr, t_data *lst_a, t_data *lst_b)
+static int		ft_push_to_a(int nbr, t_data *lst_a, t_data *lst_b)
 {
 	t_list		*tmp_b;
 
@@ -75,7 +77,7 @@ int				ft_push_to_a(int nbr, t_data *lst_a, t_data *lst_b)
 	return (0);
 }
 
-int				ft_push_to_b_order(t_data *lst_a, t_data *lst_b)
+static int		ft_push_to_b_order(t_data *lst_a, t_data *lst_b)
 {
 	t_list		*tmp_a;
 
@@ -112,7 +114,6 @@ int				solve_middle(int nbr, t_data *lst_a, t_data *lst_b)
 	lst_a->total = 0;
 	lst_b->total = 0;
 	ft_find_mediane(nbr, lst_a);
-	ft_display_info(nbr, lst_a, lst_b);
 	ft_first_middle(lst_a, lst_b, 0);
 	ft_push_to_a(nbr, lst_a, lst_b);
 	ft_push_to_b_order(lst_a, lst_b);

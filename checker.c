@@ -12,55 +12,66 @@
 
 #include "headers/push_swap.h"
 
-int     ft_get_cmd(t_data *lst_a, t_data *lst_b)
+/*
+**  This file is the main file for the 'CHECKER' program
+**  It contains 4 functions
+**  -'int   ft_get_cmd(t_data *lst_a, t_data *lst_b)':  Use GNL to read the cmd
+**  -'int   ft_start(int nbr, char **argv)':    Create two Stack, puts numbers,
+**  and start the program.
+**  -'void  ft_initialize_c(int nbr, int argc, char **argv)':   Checks if the
+**  numbers given in arguments are CORRECT.
+**  -'int   main(int argc, char **argv)':   main program
+*/
+
+int				ft_get_cmd(t_data *lst_a, t_data *lst_b)
 {
-    char    *line;
- 
-    line = NULL;
-    //printf("\n\nDEBUT GNL\n");
-    while ((get_next_line(0, &line) == 1))
-    {
-        if (ft_check_cmd(line, lst_a, lst_b) == 0)
-            free(line);
-        else
-        {
-            free(line);
-            return (1);
-        }
-        //ft_display_lst(lst_a, lst_b);
-    }
-    free(line);
-    return (0);
+	char		*line;
+
+	line = NULL;
+	while ((get_next_line(0, &line)) == 1)
+	{
+		if (ft_check_cmd(line, lst_a, lst_b) == 0)
+		{
+			free(line);
+			line = NULL;
+		}
+		else
+		{
+			free(line);
+			line = NULL;
+			return (1);
+		}
+	}
+	free(line);
+	line = NULL;
+	return (0);
 }
 
-int        ft_start(int nbr, char **argv)
+int				ft_start(int nbr, char **argv)
 {
-    t_data      *lst_a;
-    t_data      *lst_b;
+	t_data		*lst_a;
+	t_data		*lst_b;
 
-    lst_a = initialize_list(nbr, argv);
-    lst_b = initialize_listb();
-    ft_full_insertion(lst_a, nbr - 1, argv);
-
-
-    // ft_display_lst(lst_a, lst_b);
-    // sleep(5);
-    if ((ft_get_cmd(lst_a, lst_b) == 1))
-    {
-        ft_free_all(lst_a, lst_b); 
-        return (1);
-    }
-
-    ft_end(lst_a, lst_b);
-
-    ft_display_lst(lst_a, lst_b);
-    ft_free_all(lst_a, lst_b);     
-    return (0);            
+	lst_a = initialize_list(nbr, argv);
+	lst_b = initialize_listb();
+	ft_full_insertion(lst_a, nbr - 1, argv);
+	if ((ft_get_cmd(lst_a, lst_b) == 1))
+	{
+		printf("Error\n");
+		ft_free_all(lst_a, lst_b);
+		return (1);
+	}
+	if (ft_end(lst_a, lst_b) == 0)
+		printf("OK\n");
+	else
+		printf("KO\n");
+	ft_free_all(lst_a, lst_b);
+	return (0);
 }
 
-void    ft_initialize_c(int nbr, int argc, char **argv)
+void			ft_initialize_c(int nbr, int argc, char **argv)
 {
-	char **tab;
+	char		**tab;
 
 	tab = NULL;
 	tab = ft_malloc_tab(nbr, argc, argv);
@@ -68,17 +79,15 @@ void    ft_initialize_c(int nbr, int argc, char **argv)
 	tab = ft_clean_tab(tab, nbr);
 	tab = ft_del_space(tab, nbr);
 	tab = ft_check_zero(tab, nbr, 0, 0);
-	ft_check_int(tab, nbr);
-	ft_duplicate(tab, nbr);
-
-	// START THE PROGRAMME then free the numbers 
-	ft_start(nbr, tab);
+	if (ft_check_int(tab, nbr) == 0)
+		if (ft_duplicate(tab, nbr) == 0)
+			ft_start(nbr, tab);
 	ft_free_tab(tab, nbr);
 }
 
-int     main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	int ret;
+	int			ret;
 
 	ret = ft_check_args(argc - 1, argv, 0);
 	if (ret == 1)
@@ -88,7 +97,7 @@ int     main(int argc, char **argv)
 		ret = ft_count(argc, argv, 0);
 		if (ret == 0)
 			return (1);
-		ft_initialize_c(ret, argc, argv);  
+		ft_initialize_c(ret, argc, argv);
 	}
 	return (0);
 }

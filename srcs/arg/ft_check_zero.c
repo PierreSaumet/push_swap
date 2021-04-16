@@ -14,16 +14,16 @@
 
 /*
 **	This file contains 3 functions:
-**	- 'int			ft_is_fullzero(char *str)':	checks if the string contains
+**	- 'static int	ft_is_fullzero(char *str)':	Checks if the string contains
 **	only '0', if yes return 0.
-**	- 'char		**ft_is_zero(char **tab, int nbr)': puts '0'.
-**	- 'char		**ft_check_zero(char **tab, int nbr, int i, int y)':	replace
+**	- 'static char	**ft_is_zero(char **tab, int nbr)': Puts '0'.
+**	- 'char		**ft_check_zero(char **tab, int nbr, int i, int y)':	Replace
 **	all 0, delete them.
 */
 
-int			ft_is_fullzero(char *str)
+int					ft_is_fullzero(char *str)
 {
-	int	i;
+	int				i;
 
 	i = 0;
 	while (str[i])
@@ -35,9 +35,9 @@ int			ft_is_fullzero(char *str)
 	return (0);
 }
 
-char		**ft_is_zero(char **tab, int nbr)
+static char			**ft_is_zero(char **tab, int nbr)
 {
-	int i;
+	int				i;
 
 	i = 0;
 	while (i < nbr)
@@ -52,9 +52,9 @@ char		**ft_is_zero(char **tab, int nbr)
 	return (tab);
 }
 
-char		**ft_check_zero(char **tab, int nbr, int i, int y)
+char				**ft_check_zero(char **tab, int nbr, int i, int y)
 {
-	int k;
+	int				k;
 
 	k = 0;
 	while (i < nbr)

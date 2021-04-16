@@ -24,7 +24,7 @@
 **      choose between the 2 functions above.
 */
 
-int			ft_find_small(t_data *lst)
+int				ft_find_small(t_data *lst)
 {
 	t_list		*tmp;
 	int			emp;
@@ -50,7 +50,7 @@ int			ft_find_small(t_data *lst)
 	return (emp);
 }
 
-int			ft_find_big(t_data *lst)
+int				ft_find_big(t_data *lst)
 {
 	t_list		*tmp;
 	int			emp;
@@ -76,7 +76,7 @@ int			ft_find_big(t_data *lst)
 	return (emp);
 }
 
-int			solve_2(t_data *lst_a)
+static int		solve_2(t_data *lst_a)
 {
 	if (lst_a->first->number > lst_a->first->next->number)
 		ft_sa(lst_a);
@@ -84,7 +84,7 @@ int			solve_2(t_data *lst_a)
 	return (0);
 }
 
-int			solve_3(t_data *lst_a)
+int				solve_3(t_data *lst_a)
 {
 	if (ft_find_big(lst_a) == 2)
 	{
@@ -109,7 +109,7 @@ int			solve_3(t_data *lst_a)
 	return (0);
 }
 
-int			sort_small(int nbr, t_data *lst_a)
+int				sort_small(int nbr, t_data *lst_a)
 {
 	if (nbr == 2)
 		return (solve_2(lst_a));
@@ -117,8 +117,11 @@ int			sort_small(int nbr, t_data *lst_a)
 	{
 		if (ft_find_big(lst_a) == 3)
 		{
-			ft_sa(lst_a);
-			write(1, "sa\n", 3);
+			if (ft_find_small(lst_a) == 2)
+			{
+				ft_sa(lst_a);
+				write(1, "sa\n", 3);
+			}
 		}
 		else
 			return (solve_3(lst_a));

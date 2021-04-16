@@ -12,6 +12,21 @@
 
 #include "../../headers/push_swap.h"
 
+/*
+**  This file contains 5 functions
+**  -'int   sort_big(int nbr, t_data *lst_a, t_data *lst_b)':   Main algorithm
+**  for sorting big list (>100), it will divide the list in four part:
+**  part 1 < Q1 / Q1 < part2 < Median / Median < part 3 < Q3 / Q3 < part 4.
+**  -'static void   push_first_quartile(t_data *lst_a, t_data *lst_b)':
+**      Push all the numbers under the Q1 into the stack B.
+**  -'static void   push_second_quartile(t_data *lst_a, t_data *lst_b)':
+**      Push all the numbers between the Q1 and the median into the stack B.
+**  -static void    push_third_quartile(t_data *lst_a, t_data *lst_b)':
+**      Push all the numbers between the median and the Q3 into the stack B.
+**  -static void    push_last_quartile(t_data *lst_a, t_data *lst_b):
+**      Push all the numbers above the Q3 into the stack b.
+*/
+
 static void		push_first_quartile(t_data *lst_a, t_data *lst_b)
 {
 	t_list		*tmp_a;
@@ -132,7 +147,6 @@ int				sort_big(int nbr, t_data *lst_a, t_data *lst_b)
 {
 	lst_a->count_ra = 0;
 	ft_find_mediane(nbr, lst_a);
-	ft_display_info(nbr, lst_a, lst_b);
 	push_first_quartile(lst_a, lst_b);
 	sort_b_to_a(lst_a, lst_b);
 	ft_rotate_count(lst_a);
@@ -142,7 +156,6 @@ int				sort_big(int nbr, t_data *lst_a, t_data *lst_b)
 	ft_do_ra(lst_a);
 	sort_b_to_a(lst_a, lst_b);
 	ft_rotate_count(lst_a);
-	ft_display_lst(lst_a, lst_b);
 	push_third_quartile(lst_a, lst_b);
 	while (lst_a->first->number != lst_a->median)
 		ft_do_ra(lst_a);

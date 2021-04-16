@@ -13,15 +13,17 @@
 #include "../../headers/push_swap.h"
 
 /*
-**  This file contains 2 functions:
-**  -'void        ft_error(void)':	Display Error
+**  This file contains 3 functions:
+**  -'static void	ft_error(void)':	Display Error
 **	-'int     ft_check_args(int argc, char **argv, int i)':	Checks how many
 **	arguments were given and if they are digit.
+**	-int	ft_count(int argc, char **argv, int count)':	Count the total
+**	of numbers form the arguments.
 */
 
-int			ft_count(int argc, char **argv, int count)
+int					ft_count(int argc, char **argv, int count)
 {
-	int		i;
+	int				i;
 
 	i = 0;
 	argc = argc - 1;
@@ -47,13 +49,13 @@ int			ft_count(int argc, char **argv, int count)
 	return (count);
 }
 
-void		ft_error(void)
+static void			ft_error(void)
 {
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
-int			ft_check_args(int argc, char **argv, int i)
+int					ft_check_args(int argc, char **argv, int i)
 {
 	if (argc + 1 < 2)
 		return (1);

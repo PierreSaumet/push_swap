@@ -14,12 +14,12 @@
 
 /*
 **	This file contains 4 functions, all used for freeing:
-**	-'void		ft_free_tab(char **tab, int nbr)':	Free the tab used to free
+**	-'void	ft_free_tab(char **tab, int nbr)':	Free the tab used to free
 **	the data passing by arguments.
-**	-'int			ft_lstsize(t_list *lst)':	Count the elements of the list.
-**	-'int			ft_delete_first(t_data *lst_a)':	Deletes the first item
-**	of the given list.
-**	-'int			ft_free_all(t_data *lst_a, t_data *lst_b)':
+**	-'int	ft_lstsize(t_list *lst)':	Count the elements of the list.
+**	-'static int	ft_delete_first(t_data *lst_a)':	Deletes the first
+**	item of the given list.
+**	-'int	ft_free_all(t_data *lst_a, t_data *lst_b)':
 **		Free the two stacks, A and B.
 */
 
@@ -50,7 +50,7 @@ int			ft_lstsize(t_list *lst)
 	return (i);
 }
 
-int			ft_delete_first(t_data *lst_a)
+static int	ft_delete_first(t_data *lst_a)
 {
 	t_list *to_del;
 

@@ -13,15 +13,21 @@
 #include "../../headers/push_swap.h"
 
 /*
-**	This file contains 2 functions:
+**	This file contains 5 functions:
 **	-'int	ft_find_best(int nbr, t_data *lst, int div)':	find where are the
 **	smallest and biggest numbers in the stack and the best play to do, rotate
 **	or reverse rotate.
-**	-'int	ft_end_find_best(int diff_min, int diff_max, t_data *lst:	find
-**	if it should put the biggest or smallest number at the top.
+**	-'static int	ft_end_find_best(int diff_min, int diff_max, t_data *lst:
+**  find if it should put the biggest or smallest number at the top.
+**  -'int   ft_ascending(t_data *lst_a, t_data *lst_b)':    checks if the list
+**  is arranged in ascending order, return 1 if not.
+**  -'static void  sort_array(long *array, int nbr)':       sort the long-array
+**  in ascending order. Use for finding the median.
+**  -'int   ft_find_mediane(int nbr, t_data *lst)':         Find the mediane
+**  the first quartile and the third quartile of the list.
 */
 
-int			ft_end_find_best(int diff_min, int diff_max, t_data *lst,
+static int		ft_end_find_best(int diff_min, int diff_max, t_data *lst,
 		int div)
 {
 	if (diff_min > diff_max)
@@ -41,10 +47,10 @@ int			ft_end_find_best(int diff_min, int diff_max, t_data *lst,
 	return (0);
 }
 
-int			ft_find_best(int nbr, t_data *lst, int div)
+int				ft_find_best(int nbr, t_data *lst, int div)
 {
-	int		diff_min;
-	int		diff_max;
+	int			diff_min;
+	int			diff_max;
 
 	if (lst == NULL)
 		return (1);
@@ -61,9 +67,9 @@ int			ft_find_best(int nbr, t_data *lst, int div)
 	return (0);
 }
 
-int			ft_ascending(t_data *lst_a, t_data *lst_b)
+int				ft_ascending(t_data *lst_a, t_data *lst_b)
 {
-	t_list	*tmp_a;
+	t_list		*tmp_a;
 
 	tmp_a = lst_a->first;
 	(void)lst_b;
@@ -76,10 +82,10 @@ int			ft_ascending(t_data *lst_a, t_data *lst_b)
 	return (0);
 }
 
-void		sort_array(long *array, int nbr)
+static void		sort_array(long *array, int nbr)
 {
-	long	tmp;
-	int		i;
+	long		tmp;
+	int			i;
 
 	tmp = 0;
 	i = 0;
@@ -97,12 +103,12 @@ void		sort_array(long *array, int nbr)
 	}
 }
 
-int			ft_find_mediane(int nbr, t_data *lst)
+int				ft_find_mediane(int nbr, t_data *lst)
 {
-	t_list	*tmp;
-	long	*array;
-	int		i;
-	int		q;
+	t_list		*tmp;
+	long		*array;
+	int			i;
+	int			q;
 
 	tmp = lst->first;
 	i = 0;

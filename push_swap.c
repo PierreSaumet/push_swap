@@ -14,9 +14,7 @@
 
 /*
 **  This file is the main file for the 'PUSH_SWAP' program
-**  It contains 5 functions
-**  -'int         ft_end(t_data *lst_a, t_data *lst_b)':    Checks if numbers
-**  are sorted. 1 / 5 / 78/ 125
+**  It contains 4 functions
 **  -'int         ft_push_swap(int nbr, t_data *lst_a, t_data *lst_b)':
 **      Different algorithms depending on the number of digits
 **  -'int        ft_start(int nbr, char **argv)':   Inits 2 stacks and starts
@@ -26,57 +24,38 @@
 **  -'int     main(int argc, char **argv)': Starts the program.
 */
 
-int         ft_push_swap(int nbr, t_data *lst_a, t_data *lst_b)
+int				ft_push_swap(int nbr, t_data *lst_a, t_data *lst_b)
 {
-    lst_a->nbr = nbr;
-    lst_b->nbr = nbr;
+	lst_a->nbr = nbr;
+	lst_b->nbr = nbr;
 	if (nbr <= 3)
 		sort_small(nbr, lst_a);
 	else if (nbr <= 100)
 		sort_middle(nbr, lst_a, lst_b);
 	else
-        sort_big(nbr, lst_a, lst_b);
+		sort_big(nbr, lst_a, lst_b);
 	return (0);
 }
 
-int        ft_start_pw(int nbr, char **argv)
+int				ft_start_pw(int nbr, char **argv)
 {
-	t_data      *lst_a;
-	t_data      *lst_b;
+	t_data		*lst_a;
+	t_data		*lst_b;
 
 	lst_a = initialize_list(nbr, argv);
 	lst_b = initialize_listb();
 	ft_full_insertion(lst_a, nbr - 1, argv);
-
-
-
-	// test algorithme de tri par selection
-	//
-	// SEULEMENT PUSH SWAP
 	if (ft_end(lst_a, lst_b) == 1)
 	{
 		ft_push_swap(nbr, lst_a, lst_b);
 	}
-	///////////////////////////////////
-	printf("\n\nFIN\n");
-    if (ft_ascending(lst_a, lst_b) == 0)
-    {
-        printf("\nListe rangee en %d coups!\n\n", lst_b->total + lst_a->total);
-        sleep(3);
-        ft_display_lst(lst_a, lst_b);
-    }
-	else
-    {
-        printf("Liste pas rangee, ERROR\n");
-    }
-
-	ft_free_all(lst_a, lst_b);     
-	return (0);            
+	ft_free_all(lst_a, lst_b);
+	return (0);
 }
 
-void    ft_initialize_pw(int nbr, int argc, char **argv)
+void			ft_initialize_pw(int nbr, int argc, char **argv)
 {
-	char **tab;
+	char		**tab;
 
 	tab = NULL;
 	tab = ft_malloc_tab(nbr, argc, argv);
@@ -84,18 +63,15 @@ void    ft_initialize_pw(int nbr, int argc, char **argv)
 	tab = ft_clean_tab(tab, nbr);
 	tab = ft_del_space(tab, nbr);
 	tab = ft_check_zero(tab, nbr, 0, 0);
-	ft_check_int(tab, nbr);
-	ft_duplicate(tab, nbr);
-
-    printf("kek\n");
-	// START THE PROGRAMME then free the numbers 
-	ft_start_pw(nbr, tab);
+	if (ft_check_int(tab, nbr) == 0)
+		if (ft_duplicate(tab, nbr) == 0)
+			ft_start_pw(nbr, tab);
 	ft_free_tab(tab, nbr);
 }
 
-int     main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	int ret;
+	int			ret;
 
 	ret = ft_check_args(argc - 1, argv, 0);
 	if (ret == 1)
@@ -103,10 +79,9 @@ int     main(int argc, char **argv)
 	else
 	{
 		ret = ft_count(argc, argv, 0);
-
 		if (ret == 0)
 			return (1);
-		ft_initialize_pw(ret, argc, argv);  
+		ft_initialize_pw(ret, argc, argv);
 	}
 	return (0);
 }

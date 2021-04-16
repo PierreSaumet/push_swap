@@ -13,25 +13,29 @@
 #include "../../headers/push_swap.h"
 
 /*
-**	This file contains  2 functions:
-**	-'int     ft_rra(t_data *lst_a)':	Rotates the stack A from the end.
+**	This file contains 4 functions:
+**	-'int	ft_do_rra(t_data *lst_a)':	Do the associate function, write it
+**	in the stdout and count the action.
+**	-'int	ft_do_rrb(t_data *lst)':	Do the associate function, write it
+**	in the stdout and count the action.
+**	-'int	ft_rra(t_data *lst_a)':		Rotates the stack A from the end.
 **	The last one becomes the first one. The first ==> second.
-**	-'int     ft_rrb(t_data *lst_b)':	Same as above but with the stack B.
+**	-'int	ft_rrb(t_data *lst_b)':		Same as above but with the stack B.
 */
 
 int				ft_do_rra(t_data *lst_a)
 {
 	ft_rra(lst_a);
-	write(1, "rra\n", 3);
+	write(1, "rra\n", 4);
 	lst_a->total++;
 	return (0);
 }
 
-int				ft_do_rrb(t_data *lst)
+int				ft_do_rrb(t_data *lst_b)
 {
-	ft_rrb(lst);
+	ft_rrb(lst_b);
 	write(1, "rrb\n", 4);
-	lst->total++;
+	lst_b->total++;
 	return (0);
 }
 
@@ -44,7 +48,6 @@ int				ft_rra(t_data *lst_a)
 		exit(EXIT_FAILURE);
 	if (ft_lstsize(lst_a->first) <= 1)
 	{
-		printf("la liste A contient 1 ou 0 elem\n");
 		return (0);
 	}
 	tmp_a = lst_a->last;
@@ -67,10 +70,7 @@ int				ft_rrb(t_data *lst_b)
 	if (lst_b == NULL)
 		exit(EXIT_FAILURE);
 	if (ft_lstsize(lst_b->first) <= 1)
-	{
-		printf("la liste A contient 1 ou 0 elem\n");
 		return (0);
-	}
 	tmp_b = lst_b->last;
 	tmp_nbr = tmp_b->number;
 	(void)tmp_nbr;

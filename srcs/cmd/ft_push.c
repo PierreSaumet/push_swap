@@ -13,10 +13,14 @@
 #include "../../headers/push_swap.h"
 
 /*
-**	This file contains 3 functions:
-**	-'int	  ft_lst_empty(t_data *lst_a, t_data *lst_b)':	Checks if the
-**	lists are usefull or empty.
-**	-'int     ft_pb(t_data *lst_a, t_data *lst_b)':	Push the first number
+**	This file contains 5 functions:
+**	-'static int	ft_lst_empty(t_data *lst_a, t_data *lst_b)':	Checks if
+**	the lists are usefull or empty.
+**	-'int	ft_do_pa(t_data *lst_a, t_data *lst_b)':		Do the associate
+**	function, write it in the stdout and count the action.
+**	-'int	ft_do_pb(t_data *lst_a, t_data *lst_b)':		Do the associate
+**	function, write it in the stdout and count the action.
+**	-'int	ft_pb(t_data *lst_a, t_data *lst_b)':	Push the first number
 **	of the stack A into the stack B, do nothing if empty.
 **	-'int     ft_pa(t_data *lst_a, t_data *lst_b)':	Same thing as above, but
 **	stack B into Stack A.
@@ -38,7 +42,7 @@ int				ft_do_pb(t_data *lst_a, t_data *lst_b)
 	return (0);
 }
 
-int				ft_lst_empty(t_data *lst_a, t_data *lst_b)
+static int		ft_lst_empty(t_data *lst_a, t_data *lst_b)
 {
 	if (lst_a == NULL || lst_b == NULL)
 		exit(EXIT_FAILURE);

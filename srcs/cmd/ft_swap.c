@@ -13,10 +13,14 @@
 #include "../../headers/push_swap.h"
 
 /*
-**	This file contains 2 functions:
-**	-'int			ft_sa(t_data *lst_a)':	Swap the first with the second
+**	This file contains 4 functions:
+**	-'int	ft_do_sa(t_data *lst_a)':	Do the associate function, write it
+**	in the stdout and count the action.
+**	-'int	ft_do_sb(t_data *lst_b)':	Do the associate function, write it
+**	in the stdout and count the action.
+**	-'int	ft_sa(t_data *lst_a)':		Swap the first with the second
 **	element of stack A.
-**	-'int			ft_sb(t_data *lst_b)':	Swap the first with the second
+**	-'int	ft_sb(t_data *lst_b)':		Swap the first with the second
 **	element of stack B.
 */
 

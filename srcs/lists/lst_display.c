@@ -13,11 +13,13 @@
 #include "../../headers/push_swap.h"
 
 /*
-**	FONCTION UTILISEE POUR AFFICHER LES LISTES PENDANT LA PERIODE DE PRODUCTION
-**			n'est pas a la norme
-**			doit etre supprime
-**
-**	==> creer une fonction d'affichage a la fin du programme!!!!!
+**	This file contains 2 functions:
+**	-'int	ft_display_lst(t_data *lista, t_data *listb)':
+**			WARNING this function is used only for displaying lists
+**			Not used...
+**	-'void	ft_display_info(int nbr, t_data *lst_a, t_data *lst_b)':
+**			WARNING this function is used only for displaying informations
+**			Not used...
 */
 
 int				ft_display_lst(t_data *lista, t_data *listb)

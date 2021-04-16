@@ -13,34 +13,40 @@
 #include "../../headers/push_swap.h"
 
 /*
-**	This file contains 1 function:
+**	This file contains 4 functions:
 **	-'int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)':
 **	One main functions of the program. Check the command from the prompt.
 **	Careful to the return, need to be change...
+**	-'static int	ft_rr(t_data *lst_a, t_data *lst_b)':	Do the double
+**	rotation for the stack A and B.
+**	-'static int	ft_ss(t_data *lst_a, t_data *lst_b)':	Do the double
+**	swap for the stack A and B.
+**	-'static int	ft_rrr(t_data *lst_a, t_data *lst_b)':	Do the double
+**	reverse rotation for the stack A and B.
 */
 
-int			ft_rr(t_data *lst_a, t_data *lst_b)
+static int		ft_rr(t_data *lst_a, t_data *lst_b)
 {
 	ft_ra(lst_a);
 	ft_rb(lst_b);
 	return (0);
 }
 
-int			ft_ss(t_data *lst_a, t_data *lst_b)
+static int		ft_ss(t_data *lst_a, t_data *lst_b)
 {
 	ft_sa(lst_a);
 	ft_sb(lst_b);
 	return (0);
 }
 
-int			ft_rrr(t_data *lst_a, t_data *lst_b)
+static int		ft_rrr(t_data *lst_a, t_data *lst_b)
 {
 	ft_rra(lst_a);
 	ft_rrb(lst_b);
 	return (0);
 }
 
-int			ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
+int				ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b)
 {
 	if (ft_strcmp(line, "sa") == 0)
 		ft_sa(lst_a);

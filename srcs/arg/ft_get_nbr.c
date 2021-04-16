@@ -13,12 +13,20 @@
 #include "../../headers/push_swap.h"
 
 /*
-**  This File contains 5 functions
+**  This File contains 4 functions:
+**	-'int	ft_end(t_data *lst_a, t_data *lst_b)': Cheks if the list is sorted
+**	in ascending number.
+**	-'static unsigned int	ft_get_len(int argc, char **argv)':	Get the length
+**	of the string.
+**	-'char	**ft_malloc_tab(int nbr, int argc, char **argv)':	Creates the tab
+**	used to receive the numbers.
+**	-'char	**ft_get_nbr(int argc, char **argv, char **tab, int nbr)':
+**		Get the numbers from the arguments.
 */
 
-int				ft_end(t_data *lst_a, t_data *lst_b)
+int					ft_end(t_data *lst_a, t_data *lst_b)
 {
-	t_list		*tmp_a;
+	t_list			*tmp_a;
 
 	tmp_a = lst_a->first;
 	if (lst_b->first == NULL)
@@ -26,17 +34,19 @@ int				ft_end(t_data *lst_a, t_data *lst_b)
 		while (tmp_a->next != NULL)
 		{
 			if (tmp_a->number > tmp_a->next->number)
+			{
 				return (1);
+			}
 			tmp_a = tmp_a->next;
 		}
 		return (0);
 	}
-	printf("ERREUR LIST2 PAS VIDE\n");
-	exit(EXIT_FAILURE);
+	else
+		return (1);
 	return (2);
 }
 
-unsigned int	ft_get_len(int argc, char **argv)
+static unsigned int	ft_get_len(int argc, char **argv)
 {
 	unsigned int	len;
 	int				i;
@@ -52,11 +62,11 @@ unsigned int	ft_get_len(int argc, char **argv)
 	return (len);
 }
 
-char			**ft_malloc_tab(int nbr, int argc, char **argv)
+char				**ft_malloc_tab(int nbr, int argc, char **argv)
 {
-	char		**tab;
-	int			len;
-	int			i;
+	char			**tab;
+	int				len;
+	int				i;
 
 	len = 0;
 	i = 0;
@@ -72,9 +82,9 @@ char			**ft_malloc_tab(int nbr, int argc, char **argv)
 	return (tab);
 }
 
-char			**ft_get_nbr(int argc, char **argv, char **tab, int nbr)
+char				**ft_get_nbr(int argc, char **argv, char **tab, int nbr)
 {
-	int			i;
+	int				i;
 
 	i = 0;
 	while (argc > 0)

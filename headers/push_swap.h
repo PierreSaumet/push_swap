@@ -43,41 +43,59 @@ typedef struct	s_data
 }				t_data;
 
 /*
-**  File lst_display.c
+**  ********************************************
+**  *  ALL FILES USED FOR CHECKING ARGUMENTS   *
+**  ********************************************
 */
-int				ft_display_lst(t_data *lsta, t_data *listb);
-void			ft_display_info(int nbr, t_data *lst_a, t_data *lst_b);
 
 /*
-**  File lst_init_insert.c
+**  File ft_check_args.c
 */
-int				ft_insertion(t_data *lst_a, int nbr);
-int				ft_full_insertion(t_data *lst_a, int nbr, char **argv);
-t_data			*initialize_list(int argc, char **argv);
-t_data			*initialize_listb(void);
+int				ft_check_args(int argc, char **argv, int i);
+int				ft_count(int argc, char **argv, int count);
 
 /*
-**  File free_list.c
+**  File ft_check_duplicate.c
 */
-void			ft_free_tab(char **tab, int nbr);
-int				ft_lstsize(t_list *lst);
-int				ft_delete_first(t_data *lst_a);
-int				ft_free_all(t_data *lst_a, t_data *lst_b);
+int				ft_duplicate(char **tab, int nbr);
+
+/*
+**  File ft_check_int.c
+*/
+int				ft_check_int(char **tab, int argc);
+
+/*
+**  File ft_check_zero.c
+*/
+char			**ft_check_zero(char **tab, int nbr, int i, int y);
+
+/*
+**  File ft_clean_tab.c
+*/
+char			**ft_clean_tab(char **tab, int argc);
+
+/*
+**	File ft_del_space.c
+*/
+char			**ft_del_space(char **tab, int argc);
+
+/*
+**  File ft_get_nbr.c
+*/
+char			**ft_malloc_tab(int nbr, int argc, char **argv);
+char			**ft_get_nbr(int argc, char **argv, char **tab, int nbr);
+int				ft_end(t_data *lst_a, t_data *lst_b);
+
+/*
+**  ********************************************
+**  *     ALL FILES USED FOR THE COMMANDS      *
+**  ********************************************
+*/
 
 /*
 **  File ft_check_cmd.c
 */
 int				ft_check_cmd(char *line, t_data *lst_a, t_data *lst_b);
-int				ft_rr(t_data *lst_a, t_data *lst_b);
-int				ft_ss(t_data *lst_a, t_data *lst_b);
-int				ft_rrr(t_data *lst_a, t_data *lst_b);
-/*
-**  File ft_swap.c
-*/
-int             ft_do_sa(t_data *lst_a);
-int             ft_do_sb(t_data *lst_b);
-int				ft_sa(t_data *lst_a);
-int				ft_sb(t_data *lst_b);
 
 /*
 **  File ft_push.c
@@ -88,6 +106,14 @@ int				ft_pb(t_data *lst_a, t_data *lst_b);
 int				ft_pa(t_data *lst_a, t_data *lst_b);
 
 /*
+**  File ft_reverse_rotate.c
+*/
+int				ft_do_rra(t_data *lst_a);
+int				ft_do_rrb(t_data *lst_b);
+int				ft_rra(t_data *lst_a);
+int				ft_rrb(t_data *lst_b);
+
+/*
 **  File ft_rotate.c
 */
 int				ft_do_rb(t_data *lst);
@@ -96,111 +122,91 @@ int				ft_ra(t_data *lst_a);
 int				ft_rb(t_data *lst_b);
 
 /*
-**  File ft_reverse_rotate.c
+**  File ft_swap.c
 */
-int				ft_do_rra(t_data *lst_a);
-int				ft_do_rrb(t_data *lst);
-int				ft_rra(t_data *lst_a);
-int				ft_rrb(t_data *lst_b);
+
+int				ft_do_sa(t_data *lst_a);
+int				ft_do_sb(t_data *lst_b);
+int				ft_sa(t_data *lst_a);
+int				ft_sb(t_data *lst_b);
 
 /*
-**  File ft_check_int.c
+**  ********************************************
+**  *  ALL FILES USED FOR FREEING THE MALLOC   *
+**  ********************************************
 */
-int				ft_neg_int(char *str);
-int				ft_int(char *str);
-int				ft_check_int(char **tab, int argc);
 
 /*
-**  File ft_check_duplicate.c
+**  File free_list.c
 */
-int				ft_duplicate(char **tab, int nbr);
+void			ft_free_tab(char **tab, int nbr);
+int				ft_lstsize(t_list *lst);
+int				ft_free_all(t_data *lst_a, t_data *lst_b);
 
 /*
-**  File ft_check_zero.c
+**  ********************************************
+**  *     ALL FILES USED FOR DISPLAY STACK     *
+**  ********************************************
 */
-char			**ft_check_zero(char **tab, int nbr, int i, int y);
 
 /*
-**  File ft_check_zero.c
+**  File lst_display.c
 */
-char			**ft_del_space(char **tab, int argc);
-
-/*
-**  File ft_clean_tab.c
-*/
-char			**ft_clean_tab(char **tab, int argc);
-
-/*
-**  File ft_check_args.c
-*/
-int				ft_check_args(int argc, char **argv, int i);
-int				ft_count(int argc, char **argv, int count);
-
-/*
-**  File ft_get_nbr.c
-*/
-char			**ft_malloc_tab(int nbr, int argc, char **argv);
-char			**ft_get_nbr(int argc, char **argv, char **tab, int nbr);
-
-/*
-**  File push_swap.c
-*/
-int				ft_end(t_data *lst_a, t_data *lst_b);
-
-/*
-**  File sort_three.c
-*/
-int				sort_small(int nbr, t_data *lst_a);
-int				ft_find_big(t_data *lst);
-int				ft_find_small(t_data *lst);
-int				solve_3(t_data *lst_a);
-
-/*
-**  File sort_ten.c
-*/
-int				sort_middle(int nbr, t_data *lst_a, t_data *lst_b);
-int				find_mediane(int nbr, t_data *lst_a);
-int				solve_middle(int nbr, t_data *lst_a, t_data *lst_b);
-
-
-
-void			ft_initialize(int nbr, int argc, char **argv);
-int				ft_start_pw(int nbr, char **argv);
-
-int			ft_find_mediane(int nbr, t_data *lst);
-/*
-**  File sort_middle.c.c
-*/
-int				test(int nbr, t_data *lst, t_data *lst_b);
-int				ft_last_turn(int nbr, t_data *lst_a, t_data *lst_b);
-
-
-int				sort_big(int nbr, t_data *lst_a, t_data *lst_b);
-int				ft_find_best(int nbr, t_data *lst, int div);
-
+int				ft_display_lst(t_data *lsta, t_data *listb);
+void			ft_display_info(int nbr, t_data *lst_a, t_data *lst_b);
 
 /*
 **  File lst_find_in.c
 */
 int				ft_len_list(t_data *lst);
-int				ft_get_small(int med, t_data *lst);
-int				ft_get_big(int med, t_data *lst);
-int				ft_find_big_med(int med, t_data *lst);
+
+/*
+**  File lst_init_insert.c
+*/
+int				ft_full_insertion(t_data *lst_a, int nbr, char **argv);
+t_data			*initialize_list(int argc, char **argv);
+t_data			*initialize_listb(void);
+
+/*
+**  ********************************************
+**  * ALL FILES USED FOR THE SORTING ALGORITHM *
+**  ********************************************
+*/
 
 /*
 **  File ft_algorithm.c
 */
-int				ft_end_find_best(int diff_min, int diff_max, t_data *lst, int div);
 int				ft_find_best(int nbr, t_data *lst, int div);
 int				ft_ascending(t_data *lst_a, t_data *lst_b);
-void			sort_array(long *array, int nbr);
 int				ft_find_mediane(int nbr, t_data *lst);
-
-
 
 /*
 **  File sort_big_next.c
 */
-int				sort_b_to_a(t_data *lst_a, t_data *lst_b);
 int				ft_rotate_count(t_data *lst_a);
+int				sort_b_to_a(t_data *lst_a, t_data *lst_b);
+
+/*
+**  File sort_big.c
+*/
+int				sort_big(int nbr, t_data *lst_a, t_data *lst_b);
+
+/*
+**  File sort_middle.c.c
+*/
+int				solve_middle(int nbr, t_data *lst_a, t_data *lst_b);
+int				ft_last_turn(int nbr, t_data *lst_a, t_data *lst_b);
+
+/*
+**  File sort_ten.c
+*/
+int				sort_middle(int nbr, t_data *lst_a, t_data *lst_b);
+
+/*
+**  File sort_three.c
+*/
+int				sort_small(int nbr, t_data *lst_a);
+int				solve_3(t_data *lst_a);
+int				ft_find_big(t_data *lst);
+int				ft_find_small(t_data *lst);
 #endif

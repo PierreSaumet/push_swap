@@ -16,9 +16,9 @@
 **  This file contains 4 functions:
 **  -'int   sort_middle(int nbr, t_data *lst_a, t_data *lst_b)':    choose
 **  between the different algo according to the amount of numbers.
-**  -'int   solve_5(int nbr, t_data *lst_a, t_data *lst_b)':        solve
+**  -'static int   solve_5(int nbr, t_data *lst_a, t_data *lst_b)': solve
 **  5 numbers.
-**  -'int   solve_4(int nbr, t_data *lst_a, t_data *lst_b)':        solve
+**  -'static int   solve_4(int nbr, t_data *lst_a, t_data *lst_b)': solve
 **  4 numbers.
 **  -'static int    ft_do(int nbr, t_data *lst_a, t_data *lst_b)':  push
 **  into stack B, solve and push into stack A.
@@ -32,7 +32,7 @@ static int			ft_do(int nbr, t_data *lst_a, t_data *lst_b)
 	return (0);
 }
 
-int					solve_4(int nbr, t_data *lst_a, t_data *lst_b)
+static int			solve_4(int nbr, t_data *lst_a, t_data *lst_b)
 {
 	if (ft_find_small(lst_a) == 1)
 		ft_do(nbr, lst_a, lst_b);
@@ -58,18 +58,17 @@ int					solve_4(int nbr, t_data *lst_a, t_data *lst_b)
 	return (0);
 }
 
-int					solve_5(int nbr, t_data *lst_a, t_data *lst_b)
+static int			solve_5(int nbr, t_data *lst_a, t_data *lst_b)
 {
-	t_list		*tmp;
-	int			mediane;
-	int			end;
+	t_list			*tmp;
+	int				end;
 
-	mediane = ft_find_mediane(nbr, lst_a);
+	ft_find_mediane(nbr, lst_a);
 	tmp = lst_a->first;
 	end = 0;
 	while (tmp && end < 2)
 	{
-		if (tmp->number < mediane)
+		if (tmp->number < lst_a->median)
 		{
 			ft_do_pb(lst_a, lst_b);
 			end++;

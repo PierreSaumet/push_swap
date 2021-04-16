@@ -12,6 +12,22 @@
 
 #include "../../headers/push_swap.h"
 
+/*
+**  This file contains 5 functions:
+**  -'int   ft_rotate_count(t_data *lst_a)':    Count how many time rotate
+**  should be operate.
+**  -'int   sort_b_to_a(t_data *lst_a, t_data *lst_b)':     Put the stack B
+**  to the stack A, biggest on the top, smallest at the bottom.
+**  -'static int    ft_find_best_big(t_data *lst)':         Find the best
+**  move to do.
+**  -'static int    ft_diff_to_find(t_data *lst)':          Used by the fct
+**  above, calculate the difference for the smallest and biggest number to
+**  go to the top to the stack B.
+**  'static int ft_min_vs_max(t_data *lst, int diff_min, int diff_max)':
+**      Do the effective rotation to get the smallest or biggest number to
+**          the top of the stack B.
+*/
+
 static int			ft_min_vs_max(t_data *lst, int diff_min, int diff_max)
 {
 	if (diff_max < diff_min)

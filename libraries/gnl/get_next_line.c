@@ -13,136 +13,79 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-/*
-**  This file contains 5 functions:
-**  int		newline_check(char *stock, int read_size):  checks if there is a
-**  new line and return 1 if it is true.
-**  char	*buf_join(char *stock, char *buf):  joins the two strings frome the
-**  previews read.
-**  char	*stock_trim(char *stock):   trimmes the string and stocks it, save
-**  it.
-**  char	*get_line(char *stock): copy the strings.
-**  int		get_next_line(int fd, char **line): main functions, use a buffer_
-**  size casts in the file.h
-*/
-
-int		newline_check(char *stock, int read_size)
+void	ft_reinit_buffer(ssize_t pos_end_line, char *buffer)
 {
-	int	i;
+	size_t	i;
+	ssize_t	start_new_line;
 
 	i = 0;
-	if (read_size == 0 && stock[0] == '\0')
-		return (2);
-	if (read_size == 0 || stock == NULL)
+	start_new_line = pos_end_line + 1;
+	while (buffer[start_new_line] != '\0')
+	{
+		buffer[i] = buffer[start_new_line];
+		start_new_line++;
+		i++;
+	}
+	buffer[i] = '\0';
+}
+
+char	*ft_create_line(char *str, char **line)
+{
+	size_t	len;
+	char	*s;
+
+	s = *line;
+	len = ft_strlen_gnl(str);
+	if (s == NULL)
+		s = ft_strndup_gnl(str, len);
+	else
+		s = ft_strjoin_gnl(s, str);
+	return (s);
+}
+
+int		ft_get_line(char **line, char *buffer, int ret_search, int ret_read)
+{
+	char	*tmp;
+
+	buffer[ret_read] = '\0';
+	if (ret_search >= 0)
+	{
+		tmp = ft_strndup_gnl(buffer, ret_search);
+		*line = ft_create_line(tmp, line);
+		ft_reinit_buffer(ret_search, buffer);
+		free(tmp);
+		return (1);
+	}
+	else
+	{
+		*line = ft_create_line(buffer, line);
 		return (0);
-	while (stock[i] != '\0')
-	{
-		if (stock[i] == '\n')
-			return (1);
-		i++;
 	}
-	return (0);
-}
-
-char	*buf_join(char *stock, char *buf)
-{
-	int		i;
-	int		j;
-	char	*new;
-
-	i = 0;
-	j = 0;
-	while (stock != NULL && stock[i] != '\0')
-		i++;
-	while (buf[j] != '\0')
-		j++;
-	if (!(new = malloc(sizeof(char) * (i + j + 1))))
-		return ((char *)ft_memdel(stock));
-	i = 0;
-	j = 0;
-	while (stock != NULL && stock[i] != '\0')
-		new[i++] = stock[j++];
-	j = 0;
-	while (buf[j] != '\0')
-		new[i++] = buf[j++];
-	new[i] = '\0';
-	if (stock != NULL)
-		ft_memdel(stock);
-	return (new);
-}
-
-char	*stock_trim(char *stock)
-{
-	int		i;
-	int		j;
-	char	*trimmed;
-
-	i = 0;
-	j = 0;
-	while (stock[i] != '\n' && stock[i] != '\0')
-		i++;
-	while (stock[i++] != '\0')
-		j++;
-	if (!(trimmed = malloc(sizeof(char) * j + 1)))
-		return (ft_memdel(stock));
-	i = 0;
-	j = 0;
-	while (stock[i] != '\n' && stock[i] != '\0')
-		i++;
-	if (stock[i] == '\0')
-		i--;
-	i++;
-	while (stock[i] != '\0')
-		trimmed[j++] = stock[i++];
-	trimmed[j] = '\0';
-	ft_memdel(stock);
-	free(trimmed);
-	return ((trimmed = NULL));
-}
-
-char	*get_line(char *stock)
-{
-	int		i;
-	char	*line;
-
-	i = 0;
-	while (stock[i] != '\n' && stock[i] != '\0')
-		i++;
-	if (!(line = malloc(sizeof(char) * i + 1)))
-		return (ft_memdel(stock));
-	i = 0;
-	while (stock[i] != '\n' && stock[i] != '\0')
-	{
-		line[i] = stock[i];
-		i++;
-	}
-	line[i] = '\0';
-	return (line);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	int			read_len;
-	char		buf[BUFFER_SIZE + 1];
-	static char	*stock = NULL;
+	static char	buffer[BUFFER_SIZE + 1];
+	ssize_t		ret_read;
+	ssize_t		ret_search;
 
-	if (line == NULL || fd < 0 || BUFFER_SIZE < 1 || (read(fd, buf, 0)) < 0)
+	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
-	read_len = 1;
-	while (!(newline_check(stock, read_len)))
+	*line = ft_strdup_gnl(buffer);
+	if ((ret_search = ft_search_line(buffer)) >= 0)
 	{
-		if ((read_len = read(fd, buf, BUFFER_SIZE)) == -1)
-			return (-1);
-		buf[read_len] = '\0';
-		(read_len == 0 || buf[read_len - 1] != '\n') ? printf("  \b\b") : 0;
-		if ((stock = buf_join(stock, buf)) == NULL)
-			return (-1);
+		free(*line);
+		(*line) = ft_strndup_gnl(buffer, ret_search);
+		ft_reinit_buffer(ret_search, buffer);
+		return (1);
 	}
-	if (newline_check(stock, read_len) == 2 && (*line = stock))
-		return (-2);
-	if ((*line = get_line(stock)) == NULL)
-		return (-1);
-	if ((stock = stock_trim(stock)))
-		return (-1);
-	return (read_len != 0 ? 1 : 0);
+	while ((ret_read = read(fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		ret_search = ft_search_line(buffer);
+		if (ft_get_line(line, buffer, ret_search, ret_read) == 1)
+			return (1);
+	}
+	if (ret_read == 0)
+		return (0);
+	return (-1);
 }
