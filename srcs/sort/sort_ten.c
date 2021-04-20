@@ -77,7 +77,7 @@ static int			solve_5(int nbr, t_data *lst_a, t_data *lst_b)
 			ft_do_ra(lst_a);
 		tmp = lst_a->first;
 	}
-	solve_3(lst_a);
+	sort_small(ft_len_list(lst_a), lst_a);
 	if (lst_b->first->number < lst_b->last->number)
 		ft_do_sb(lst_b);
 	ft_do_pa(lst_a, lst_b);

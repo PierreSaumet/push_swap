@@ -22,78 +22,6 @@
 **			Not used...
 */
 
-int				ft_display_lst(t_data *lista, t_data *listb)
-{
-	t_list		*tmp_a;
-	t_list		*tmp_b;
-	int			len_a;
-	int			len_b;
-
-	tmp_a = lista->first;
-	tmp_b = listb->first;
-	if (lista == NULL || listb == NULL)
-		return (1);
-	len_a = ft_lstsize(lista->first);
-	len_b = 0;
-	if (listb->first == NULL)
-	{
-		printf("Liste B est NULL\n");
-		len_b = 0;
-	}
-	else
-	{
-		printf("liste B est different de nul\n");
-		len_b = ft_lstsize(listb->first);
-	}
-	if (listb->first == NULL)
-	{
-		while (tmp_a != NULL)
-		{
-			printf("c1\t%d  \n", tmp_a->number);
-			tmp_a = tmp_a->next;
-		}
-	}
-	else if (len_a >= len_b)
-	{
-		printf("len_a=%d >= len_b=%d\n", len_a, len_b);
-		while (len_b > 0)
-		{
-			printf("c2\t%d %d\n", tmp_a->number, tmp_b->number);
-			tmp_b = tmp_b->next;
-			tmp_a = tmp_a->next;
-			len_b--;
-			len_a--;
-		}
-		while (len_a > 0)
-		{
-			printf("c3\t%d  \n", tmp_a->number);
-			tmp_a = tmp_a->next;
-			len_a--;
-		}
-	}
-	else if (len_b > len_a)
-	{
-		printf("len_b=%d > len_a=%d\n", len_b, len_a);
-		while (len_a > 0)
-		{
-			printf("c4\t%d %d\n", tmp_a->number, tmp_b->number);
-			tmp_b = tmp_b->next;
-			tmp_a = tmp_a->next;
-			len_b--;
-			len_a--;
-		}
-		while (len_b > 0)
-		{
-			printf("c3\t  %d\n", tmp_b->number);
-			tmp_b = tmp_b->next;
-			len_b--;
-		}
-	}
-	printf("  \t_ _\n");
-	printf("  \ta b\n");
-	return (0);
-}
-
 void			ft_display_info(int nbr, t_data *lst_a, t_data *lst_b)
 {
 	printf("SOLVE TEST <100\n");
@@ -107,6 +35,5 @@ void			ft_display_info(int nbr, t_data *lst_a, t_data *lst_b)
 	printf("Nombre des actions totales: %d\n", lst_a->total + lst_b->total);
 	printf("nbr = %d nbr mod 2 = %d\n", nbr, nbr % 2);
 	sleep(5);
-	ft_display_lst(lst_a, lst_b);
 	sleep(2);
 }

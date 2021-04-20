@@ -14,8 +14,6 @@ NAME		=		checker
 
 NAME2		=		push_swap
 
-
-
 TEST		+=		srcs/free/free_list.c		\
 					srcs/lists/lst_init_insert.c	\
 					srcs/lists/lst_display.c		\
@@ -41,7 +39,6 @@ TEST		+=		srcs/free/free_list.c		\
 
 C		=		checker.c
 
-
 PW		=		push_swap.c
 
 LIBFT		=		libraries/libft/libft.a
@@ -63,23 +60,13 @@ OBJS2		=		$(TEST:.c=.o) $(PW:.c=.o)
 INCLUDES	=		headers/
 
 
-all: libftcomp gnlcomp $(NAME) $(NAME2) 
-
-#$(OBJS): %.o: %.c $(HEADER)
-#		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ -g
-		
+all: libftcomp gnlcomp $(NAME) $(NAME2) 	
 
 $(NAME): $(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -lm -o $@
-
-
-#$(OBJS2): %.o: %.c $(HEADER)
-#		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ -g
-		
+			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -lm -o $@		
 
 $(NAME2): $(OBJS2)
 			$(CC) $(CFLAGS) $(OBJS2) $(LIBFT) $(GNL) -lm -o $@
-
 
 libftcomp:
 		@cd libraries/libft && make
